@@ -21,14 +21,14 @@ public class Main {
         //Cas invalide
         System.out.println(newLine + "Cas invalide");
 
-        System.out.println("Construction d'un Jour avec la valeur 35");
+        /*System.out.println("Construction d'un Jour avec la valeur 35");
         try
         {
             Jour unJourInvalide = new Jour(35);
         } catch (IllegalArgumentException e)
         {
             System.err.println("Exception argument illegal: " + e.getMessage());
-        }
+        }*/
 
         /*System.out.println("Jour: " + unJourInvalide.getJour());
 
