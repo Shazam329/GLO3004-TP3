@@ -13,7 +13,7 @@ public class An
     ///////////////////////
 
     //Valeur du an
-    int m_nAn;
+    private int m_nAn;
 
 
     ///////////////////

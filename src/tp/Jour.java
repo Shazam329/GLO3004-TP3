@@ -13,7 +13,7 @@ public class Jour
     ///////////////////////
 
     //Valeur du jour
-    int m_nJour;
+    private int m_nJour;
 
 
     ///////////////////

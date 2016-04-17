@@ -13,7 +13,7 @@ public class Mois
     ///////////////////////
 
     //Valeur du mois
-    int m_nMois;
+    private int m_nMois;
 
 
     ///////////////////

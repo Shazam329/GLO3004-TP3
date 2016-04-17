@@ -11,7 +11,11 @@ import static org.junit.Assert.*;
  */
 public class JourTest
 {
-    //Tests du constructeur
+    /////////////////////////////
+    //  Tests du constructeur  //
+    /////////////////////////////
+
+    //Test de constructeur valide
     @Test
     public void test_JourValide() throws Exception
     {
@@ -19,6 +23,7 @@ public class JourTest
         assertEquals(unJour.getJour(), 5);
     }
 
+    //Test de constructeur invalide (valeur supérieure à 31)
     @Test
     public void test_JourInvalideValeurSup() throws Exception
     {
@@ -31,6 +36,7 @@ public class JourTest
         }
     }
 
+    //Test de constructeur invalide (valeur inférieure à 1)
     @Test
     public void test_JourInvalideValeurInf() throws Exception
     {
@@ -43,7 +49,12 @@ public class JourTest
         }
     }
 
-    //Tests de la fonction getter
+
+    ////////////////////////////////////////////
+    //  Tests des fonctions getter et setter  //
+    ////////////////////////////////////////////
+
+    //Test de la fonction getter getJour
     @Test
     public void test_getJour() throws Exception
     {
@@ -51,7 +62,7 @@ public class JourTest
         assertEquals(unJour.getJour(), 5);
     }
 
-    //Tests de la fonction setter
+    //Test de la fonction setter setJour valide
     @Test
     public void test_setJourValide() throws Exception
     {
@@ -60,6 +71,7 @@ public class JourTest
         assertEquals(unJour.getJour(), 6);
     }
 
+    //Test de la fonction setter setJour invalide (valeur supérieure à 31)
     @Test
     public void test_setJourInvalideValeurSup() throws Exception
     {
@@ -74,6 +86,7 @@ public class JourTest
         }
     }
 
+    //Test de la fonction setter setJour invalide (valeur inférieure à 1)
     @Test
     public void test_setJourInvalideValeurInf() throws Exception
     {

@@ -11,7 +11,11 @@ import static org.junit.Assert.*;
  */
 public class AnTest
 {
-    //Tests du constructeur
+    /////////////////////////////
+    //  Tests du constructeur  //
+    /////////////////////////////
+
+    //Test de constructeur valide
     @Test
     public void test_AnValide() throws Exception
     {
@@ -19,6 +23,7 @@ public class AnTest
         assertEquals(unAn.getAn(), 2005);
     }
 
+    //Test de constructeur invalide (valeur supérieure à 20000)
     @Test
     public void test_AnInvalideValeurSup() throws Exception
     {
@@ -31,6 +36,7 @@ public class AnTest
         }
     }
 
+    //Test de constructeur invalide (valeur inférieure à 1900)
     @Test
     public void test_AnInvalideValeurInf() throws Exception
     {
@@ -43,7 +49,12 @@ public class AnTest
         }
     }
 
-    //Tests de la fonction getter
+
+    ////////////////////////////////////////////
+    //  Tests des fonctions getter et setter  //
+    ////////////////////////////////////////////
+
+    //Test de la fonction getter getAn
     @Test
     public void test_getAn() throws Exception
     {
@@ -51,7 +62,7 @@ public class AnTest
         assertEquals(unAn.getAn(), 2005);
     }
 
-    //Tests de la fonction setter
+    //Test de la fonction setter setAn valide
     @Test
     public void test_setAnValide() throws Exception
     {
@@ -60,6 +71,7 @@ public class AnTest
         assertEquals(unAn.getAn(), 2006);
     }
 
+    //Test de la fonction setter setAn invalide (valeur supérieure à 20000)
     @Test
     public void test_setAnInvalideValeurSup() throws Exception
     {
@@ -74,6 +86,7 @@ public class AnTest
         }
     }
 
+    //Test de la fonction setter setAn invalide (valeur inférieure à 1900)
     @Test
     public void test_setAnInvalideValeurInf() throws Exception
     {
