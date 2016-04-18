@@ -32,7 +32,10 @@ public class Main {
         //uneDate.setAn(new An(2006));
         //System.out.println("An d'une date: " + uneDate.getAn());
 
-        Compte compte = new Compte(10,0,uneDate, null, 0);
+        Compte compte = new Compte(10,0, uneDate, null, 0);
+        compte.retrait(2);
+        compte.depot(5);
+        compte.depotLiquide(5000);
 
         /*System.out.println("Construction d'un Jour avec la valeur 35");
         try

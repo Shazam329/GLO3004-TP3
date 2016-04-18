@@ -1,8 +1,7 @@
 package tp;
 
-import com.sun.istack.internal.NotNull;
-import com.sun.istack.internal.Nullable;
 
+import com.sun.javaws.exceptions.InvalidArgumentException;
 import tp.Constantes.*;
 
 import static tp.Constantes.MAX_DEPOT_LIQUIDE;
@@ -28,14 +27,16 @@ public class Compte {
     private int montantDeposeLiquide;
 
     ///////////////////
-    // Constructeurs //
+    // Constructeur  //
     ///////////////////
-    public Compte(@NotNull int solde, @NotNull int nip, @NotNull Date ouverture, @Nullable Date fermeture, @NotNull int montantDeposeLiquide){
+    public Compte(int solde, int nip, Date ouverture, Date fermeture, int montantDeposeLiquide){
         // Préconditions
         if (montantDeposeLiquide > MAX_DEPOT_LIQUIDE)
             throw new IllegalArgumentException("Le montant total déposé en argent liquide ne doit pas dépasser le montant maximal permis.");
         if(solde < MIN_SOLDE)
             throw new IllegalArgumentException("Le solde d'un compte actif ne doit pas être inférieur au solde minimal.");
+        if(ouverture == null)
+            throw new IllegalArgumentException("La date d'ouverture ne doit pas être nulle.");
         if(fermeture != null)
             throw new IllegalArgumentException("La date de fermeture doit être nulle.");
 
@@ -57,4 +58,124 @@ public class Compte {
             throw new IllegalStateException("Le solde d'un compte actif ne doit pas être inférieur au solde minimal.");
     }
 
+    ///////////////////////
+    // Fonctions Getters //
+    ///////////////////////
+
+    public int getSolde(){
+        return solde;
+    }
+    public int getNip(){
+        return nip;
+    }
+    public Date getDateOuverture(){
+        return ouverture;
+    }
+    public Date getDateFermeture(){
+        return fermeture;
+    }
+    public int getMontantDeposeLiquide(){
+        return montantDeposeLiquide;
+    }
+
+    ///////////////////////
+    // Fonctions Setters //
+    ///////////////////////
+    /*public void setSolde(@NotNull int solde){
+        this.solde = solde;
+        verifieInvariants();
+    }*/
+    /*public void setNip(@NotNull int nip){
+        this.nip = nip;
+        verifieInvariants();
+    }*/
+    /*public void setDateOuverture(@NotNull Date ouverture){
+        this.ouverture = ouverture;
+        verifieInvariants();
+    }*/
+    public void setDateFermeture(Date fermeture){
+        this.fermeture = fermeture;
+        verifieInvariants();
+    }
+    /*public void setMontantDeposeLiquide(@NotNull int montantDeposeLiquide){
+        this.montantDeposeLiquide = montantDeposeLiquide;
+        verifieInvariants();
+    }*/
+    
+    ////////////////////////
+    // Méthodes publiques //
+    ////////////////////////
+
+    // Utilisé pour retirer un montant d'argent (non liquide) du compte
+    public void retrait(int montantRetrait){
+        // Préconditions
+        if (fermeture != null)
+            throw new IllegalArgumentException("Un compte doit être actif pour effectuer un retrait.");
+        if(montantRetrait <= 0)
+            throw new IllegalArgumentException("Le montant du retrait doit être supérieur à zéro.");
+        if (solde - montantRetrait < MIN_SOLDE)
+            throw new IllegalArgumentException("Le solde ne doit pas être inférieur au solde minimum après le retrait.");
+
+        // Post-conditions
+        solde -= montantRetrait;
+
+        // Vérifie les invariants
+        verifieInvariants();
+    }
+
+    //Utilisé pour déposer un montant d'argent (non liquide) dans le compte
+    public void depot(int montantDepot){
+        // Préconditions
+        if (fermeture != null)
+            throw new IllegalArgumentException("Un compte doit être actif pour effectuer un dépot.");
+        if(montantDepot <= 0)
+            throw new IllegalArgumentException("Le montant du dépot doit être supérieur à zéro.");
+
+        // Post-conditions
+        solde += montantDepot;
+
+        // Vérifie les invariants
+        verifieInvariants();
+    }
+
+    //Utilisé pour déposer un montant d'argent liquide dans le compte
+    public void depotLiquide(int montantDepot){
+        // Préconditions
+        if (fermeture != null)
+            throw new IllegalArgumentException("Un compte doit être actif pour effectuer un dépot.");
+        if(montantDepot <= 0)
+            throw new IllegalArgumentException("Le montant du dépot doit être supérieur à zéro.");
+        if(solde + montantDepot > MAX_DEPOT_LIQUIDE)
+            throw new IllegalArgumentException("Le montant total déposé en argent liquide ne doit pas dépasser le montant maximal permis.");
+
+        // Post-conditions
+        solde += montantDepot;
+        montantDeposeLiquide += montantDepot;
+
+        // Vérifie les invariants
+        verifieInvariants();
+    }
+
+    //Utilisé pour remettre à 0 la valeur de montantDeposeLiquide au début de chaque
+    //exercice financier par la Banque
+    public void remiseZeroMontantDeposeLiquide(){
+        // Post-conditions
+        montantDeposeLiquide = 0;
+
+        // Vérifie les invariants
+        verifieInvariants();
+    }
+
+    //Pour permettre de modifier le NIP du compte
+    public void modifierNIP(int nNIP){
+        // Préconditions
+        if(nip == nNIP)
+            throw new IllegalArgumentException("Le NIP doit être différent du NIP actuel.");
+
+        // Post-conditions
+        nip = nNIP;
+
+        // Vérifie les invariants
+        verifieInvariants();
+    }
 }
