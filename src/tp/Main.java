@@ -1,5 +1,7 @@
 package tp;
 
+import com.sun.istack.internal.NotNull;
+
 public class Main {
 
     public static void main(String[] args) {
@@ -8,7 +10,7 @@ public class Main {
 
         //Tests pour la classe Jour
         //Cas valide
-        System.out.println("Tests de la classe Jour" + newLine + newLine + "Cas valide");
+        /*System.out.println("Tests de la classe Jour" + newLine + newLine + "Cas valide");
 
         System.out.println("Construction d'un Jour avec la valeur 12");
         Jour unJour = new Jour(12);
@@ -20,15 +22,17 @@ public class Main {
 
         //Cas invalide
         System.out.println(newLine + "Cas invalide");
+        */
 
         Jour jourDate = new Jour(12);
         Mois moisDate = new Mois(12);
         An anDate = new An(2005);
-
         Date uneDate = new Date(jourDate, moisDate, anDate);
 
-        uneDate.setAn(new An(2006));
-        System.out.println("An d'une date: " + uneDate.getAn());
+        //uneDate.setAn(new An(2006));
+        //System.out.println("An d'une date: " + uneDate.getAn());
+
+        Compte compte = new Compte(10,0,uneDate, null, 0);
 
         /*System.out.println("Construction d'un Jour avec la valeur 35");
         try
