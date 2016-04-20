@@ -60,11 +60,11 @@ public class Banque {
     ////////////////////////
     public void ouvrirCompte(int soldeInit, NumCompte nc, Date o){
         // Préconditions
-        if(soldeInit < MIN_SOLDE)
+        if (soldeInit < MIN_SOLDE)
             throw new IllegalArgumentException("Le solde initial ne doit pas être inférieur au solde minimal.");
-        if(comptes.size() >= MAX_NUM)
+        if (comptes.size() >= MAX_NUM)
             throw new IllegalArgumentException("Le nombre de comptes ne doit pas être supérieur à la limite maximale.");
-        if(comptes.containsKey(nc.getNum())){
+        if (comptes.containsKey(nc.getNum())){
             throw new IllegalArgumentException("Un compte avec ce numéro existe déjà.");
         }
 
@@ -79,11 +79,11 @@ public class Banque {
 
     public void fermerCompte(NumCompte nc, Date f){
         // Préconditions
-        if(!comptes.containsKey(nc.getNum()))
+        if (!comptes.containsKey(nc.getNum()))
             throw new IllegalArgumentException("Un compte avec ce numéro n'existe pas.");
-        if(comptes.get(nc.getNum()).getSolde() != MIN_SOLDE)
+        if (comptes.get(nc.getNum()).getSolde() != MIN_SOLDE)
             throw new IllegalArgumentException("Pour une fermeture, le solde du compte doit être le solde minimum.");
-        if(comptes.get(nc.getNum()).getDateFermeture() != null)
+        if (comptes.get(nc.getNum()).getDateFermeture() != null)
             throw new IllegalArgumentException("Le compte est déjà fermé.");
         if (f == null)
             throw new IllegalArgumentException("La date de fermeture ne doit pas être nulle.");
@@ -97,11 +97,11 @@ public class Banque {
 
     public void supprimerCompte(NumCompte nc, Date d){
         // Préconditions
-        if(!comptes.containsKey(nc.getNum()))
+        if (!comptes.containsKey(nc.getNum()))
             throw new IllegalArgumentException("Un compte avec ce numéro n'existe pas.");
-        if(comptes.get(nc.getNum()).getSolde() != MIN_SOLDE)
+        if (comptes.get(nc.getNum()).getSolde() != MIN_SOLDE)
             throw new IllegalArgumentException("Pour une fermeture, le solde du compte doit être le solde minimum.");
-        if(comptes.get(nc.getNum()).getDateFermeture() == null)
+        if (comptes.get(nc.getNum()).getDateFermeture() == null)
             throw new IllegalArgumentException("Le compte doit avoir une date de fermerture.");
         // Précondition sur la date d'ouverture
         Date f = comptes.get(nc.getNum()).getDateOuverture();
@@ -120,10 +120,24 @@ public class Banque {
 
     public void retraitC(NumCompte nc, int montantRetrait){
         // Préconditions
+        if (montantRetrait < 0)
+            throw new IllegalArgumentException("Le montant du retrait doit être plus grand que zéro.");
+        if (!comptes.containsKey(nc.getNum()))
+            throw new IllegalArgumentException("Un compte avec ce numéro n'existe pas.");
+        if (comptes.get(nc.getNum()).getDateFermeture() != null)
+            throw new IllegalArgumentException("Le compte ne doit pas avoir une date de fermerture.");
+        if (comptes.get(nc.getNum()).getSolde() - montantRetrait < MIN_SOLDE)
+            throw new IllegalArgumentException("Le solde du compte moins le retrait doit être plus grand ou égal au solde minimum.");
+        if (soldeG - montantRetrait != soldeV + entrees - sorties + montantRetrait)
+            throw new IllegalArgumentException("La vérification des montants doit balancer après un retrait.");
 
         // Post-conditions
+        comptes.get(nc.getNum()).retrait(montantRetrait);
+        sorties += montantRetrait;
+        soldeG -= montantRetrait;
 
         // Vérifie les invariants
+        verifieInvariants();
     }
 
     public void depotC(NumCompte nc, int montantDepot){
@@ -132,6 +146,7 @@ public class Banque {
         // Post-conditions
 
         // Vérifie les invariants
+        verifieInvariants();
     }
 
     public void depotLC(NumCompte nc, int montantDepot){
@@ -140,6 +155,7 @@ public class Banque {
         // Post-conditions
 
         // Vérifie les invariants
+        verifieInvariants();
     }
 
     public void virementC(NumCompte source, NumCompte destinataire, int montantTransfert){
@@ -148,6 +164,7 @@ public class Banque {
         // Post-conditions
 
         // Vérifie les invariants
+        verifieInvariants();
     }
 
     public void ch_NIP(NumCompte nc, int nNIP){
@@ -156,6 +173,7 @@ public class Banque {
         // Post-conditions
 
         // Vérifie les invariants
+        verifieInvariants();
     }
 
     public void bilanV(Date d){
@@ -164,6 +182,7 @@ public class Banque {
         // Post-conditions
 
         // Vérifie les invariants
+        verifieInvariants();
     }
 
     public void transactionSortante(NumCompte source, int MontantEnvoye){
@@ -172,6 +191,7 @@ public class Banque {
         // Post-conditions
 
         // Vérifie les invariants
+        verifieInvariants();
     }
 
     public void transactionEntrante(NumCompte destinataire, int montantRecu){
@@ -180,5 +200,6 @@ public class Banque {
         // Post-conditions
 
         // Vérifie les invariants
+        verifieInvariants();
     }
 }
