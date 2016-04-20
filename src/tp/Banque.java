@@ -30,12 +30,13 @@ public class Banque {
     public Banque(Date dateExFin){
 
         // Post-conditions
-        comptes = new HashMap<>();
-        entrees = 0;
-        sorties = 0;
-        soldeG = 0;
-        soldeV = 0;
-        gains = 0;
+        this.comptes = new HashMap<>();
+        this.entrees = 0;
+        this.sorties = 0;
+        this.soldeG = 0;
+        this.soldeV = 0;
+        this.gains = 0;
+        this.dateExFin = dateExFin;
 
         // Vérifie les invariants
         verifieInvariants();
@@ -243,10 +244,22 @@ public class Banque {
     public void bilanV(Date d){
 
         // Préconditions
-
+        if (d.getJour().getJour() != dateExFin.getJour().getJour())
+            throw new IllegalArgumentException("Le jour doit correspondre au jour de la date du bilan.");
+        if (d.getMois().getMois() != dateExFin.getMois().getMois())
+            throw new IllegalArgumentException("Le mois doit correspondre au mois de la date du bilan.");
+        if (soldeG != soldeV + entrees - sorties)
+            throw new IllegalArgumentException("La vérification des montants doit balancer avant de faire le bilan.");
 
         // Post-conditions
-
+        soldeV = 0;
+        for (Compte c : comptes.values()) {
+            soldeV += c.getSolde();
+            c.remiseZeroMontantDeposeLiquide();
+        }
+        soldeG = soldeV;
+        entrees = 0;
+        sorties = 0;
 
         // Vérifie les invariants
         verifieInvariants();
