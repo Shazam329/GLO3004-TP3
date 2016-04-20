@@ -2,11 +2,7 @@ package tp;
 
 
 import com.sun.javaws.exceptions.InvalidArgumentException;
-import tp.Constantes.*;
-
-import static tp.Constantes.MAX_DEPOT_LIQUIDE;
-import static tp.Constantes.MIN_SOLDE;
-
+import static tp.Constantes.*;
 
 /**
  *  Nom de la classe: Compte
@@ -51,6 +47,9 @@ public class Compte {
         verifieInvariants();
     }
 
+    ///////////////////////
+    // Invariants        //
+    ///////////////////////
     private void verifieInvariants(){
         if (montantDeposeLiquide > MAX_DEPOT_LIQUIDE)
             throw new IllegalStateException("Le montant total déposé en argent liquide ne doit pas dépasser le montant maximal permis.");
@@ -61,7 +60,6 @@ public class Compte {
     ///////////////////////
     // Fonctions Getters //
     ///////////////////////
-
     public int getSolde(){
         return solde;
     }
@@ -81,27 +79,13 @@ public class Compte {
     ///////////////////////
     // Fonctions Setters //
     ///////////////////////
-    /*public void setSolde(@NotNull int solde){
-        this.solde = solde;
-        verifieInvariants();
-    }*/
-    /*public void setNip(@NotNull int nip){
-        this.nip = nip;
-        verifieInvariants();
-    }*/
-    /*public void setDateOuverture(@NotNull Date ouverture){
-        this.ouverture = ouverture;
-        verifieInvariants();
-    }*/
     public void setDateFermeture(Date fermeture){
         this.fermeture = fermeture;
+
+        // Vérifie les invariants
         verifieInvariants();
     }
-    /*public void setMontantDeposeLiquide(@NotNull int montantDeposeLiquide){
-        this.montantDeposeLiquide = montantDeposeLiquide;
-        verifieInvariants();
-    }*/
-    
+
     ////////////////////////
     // Méthodes publiques //
     ////////////////////////
