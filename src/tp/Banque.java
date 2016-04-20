@@ -1,15 +1,13 @@
 package tp;
 
-import com.sun.javaws.exceptions.InvalidArgumentException;
-
 import java.util.HashMap;
-
 import static tp.Constantes.*;
 
 /**
  *  Nom de la classe: Banque
  *  Description: Représente une banque, les comptes qui lui sont associés, et les opérations qu'on peut y effectuer
  *  Invariants:
+ *      La somme globale des soldes des comptes doit être égale à la somme des soldes en début d'exercice + les entrées - les sorties
  */
 public class Banque {
 
