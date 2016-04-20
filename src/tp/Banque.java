@@ -10,7 +10,7 @@ import static tp.Constantes.*;
  *  Nom de la classe: Banque
  *  Description: Représente une banque, les comptes qui lui sont associés, et les opérations qu'on peut y effectuer
  *  Invariants:
-   */
+ */
 public class Banque {
 
     ///////////////////////
@@ -105,14 +105,9 @@ public class Banque {
             throw new IllegalArgumentException("Le compte doit avoir une date de fermerture.");
         // Précondition sur la date d'ouverture
         Date f = comptes.get(nc.getNum()).getDateOuverture();
-        if (d.getAn().getAn() > f.getAn().getAn() + 2){
-            // OK, ouvert depuis plus de 2 ans
-        }else if (d.getAn().getAn() == f.getAn().getAn() + 2 && d.getMois().getMois() > f.getMois().getMois()){
-            // OK, ouvert depuis plus de 2 ans
-        }else if (d.getAn().getAn() == f.getAn().getAn() + 2 && d.getMois() == f.getMois() && d.getJour().getJour() > f.getJour().getJour()){
-            //  OK, ouvert depuis plus de 2 ans
-        }
-        else {
+        if (!(d.getAn().getAn() > f.getAn().getAn() + 2)
+                || !(d.getAn().getAn() == f.getAn().getAn() + 2 && d.getMois().getMois() > f.getMois().getMois())
+                || !(d.getAn().getAn() == f.getAn().getAn() + 2 && d.getMois().getMois() == f.getMois().getMois() && d.getJour().getJour() > f.getJour().getJour())){
             throw new IllegalArgumentException("La date de fermeture ne doit pas être nulle.");
         }
 
@@ -121,5 +116,69 @@ public class Banque {
 
         // Vérifie les invariants
         verifieInvariants();
+    }
+
+    public void retraitC(NumCompte nc, int montantRetrait){
+        // Préconditions
+
+        // Post-conditions
+
+        // Vérifie les invariants
+    }
+
+    public void depotC(NumCompte nc, int montantDepot){
+        // Préconditions
+
+        // Post-conditions
+
+        // Vérifie les invariants
+    }
+
+    public void depotLC(NumCompte nc, int montantDepot){
+        // Préconditions
+
+        // Post-conditions
+
+        // Vérifie les invariants
+    }
+
+    public void virementC(NumCompte source, NumCompte destinataire, int montantTransfert){
+        // Préconditions
+
+        // Post-conditions
+
+        // Vérifie les invariants
+    }
+
+    public void ch_NIP(NumCompte nc, int nNIP){
+        // Préconditions
+
+        // Post-conditions
+
+        // Vérifie les invariants
+    }
+
+    public void bilanV(Date d){
+        // Préconditions
+
+        // Post-conditions
+
+        // Vérifie les invariants
+    }
+
+    public void transactionSortante(NumCompte source, int MontantEnvoye){
+        // Préconditions
+
+        // Post-conditions
+
+        // Vérifie les invariants
+    }
+
+    public void transactionEntrante(NumCompte destinataire, int montantRecu){
+        // Préconditions
+
+        // Post-conditions
+
+        // Vérifie les invariants
     }
 }
