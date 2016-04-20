@@ -198,10 +198,26 @@ public class Banque {
     public void virementC(NumCompte source, NumCompte destinataire, int montantTransfert){
 
         // Préconditions
-
+        if (montantTransfert < 0)
+            throw new IllegalArgumentException("Le montant du transfert doit être plus grand que zéro.");
+        if (!comptes.containsKey(source.getNum()))
+            throw new IllegalArgumentException("Un compte avec ce numéro n'existe pas.");
+        if (!comptes.containsKey(destinataire.getNum()))
+            throw new IllegalArgumentException("Un compte avec ce numéro n'existe pas.");
+        if (source.getNum() == destinataire.getNum())
+            throw new IllegalArgumentException("Les numéros des comptes source et destinataire doivent être différents.");
+        if (comptes.get(source.getNum()).getDateFermeture() != null)
+            throw new IllegalArgumentException("Le compte est déjà fermé.");
+        if (comptes.get(source.getNum()).getSolde() - montantTransfert < MIN_SOLDE)
+            throw new IllegalArgumentException("Le solde du compte moins le transfert doit être plus grand ou égal au solde minimum.");
+        if (soldeG + montantTransfert - montantTransfert != soldeV + (entrees + montantTransfert) - (sorties + montantTransfert))
+            throw new IllegalArgumentException("La vérification des montants doit balancer après un transfert.");
 
         // Post-conditions
-
+        entrees += montantTransfert;
+        sorties += montantTransfert;
+        comptes.get(source.getNum()).retrait(montantTransfert);
+        comptes.get(destinataire.getNum()).depot(montantTransfert);
 
         // Vérifie les invariants
         verifieInvariants();
@@ -211,10 +227,13 @@ public class Banque {
     public void ch_NIP(NumCompte nc, int nNIP){
 
         // Préconditions
-
+        if (!comptes.containsKey(nc.getNum()))
+            throw new IllegalArgumentException("Un compte avec ce numéro n'existe pas.");
+        if (nNIP == comptes.get(nc.getNum()).getNip())
+            throw new IllegalArgumentException("Le nouveau NIP doit être différent de l'ancien.");
 
         // Post-conditions
-
+        comptes.get(nc.getNum()).modifierNIP(nNIP);
 
         // Vérifie les invariants
         verifieInvariants();
@@ -253,7 +272,7 @@ public class Banque {
 
 
         // Post-conditions
-        
+
 
         // Vérifie les invariants
         verifieInvariants();
