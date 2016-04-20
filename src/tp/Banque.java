@@ -117,7 +117,7 @@ public class Banque {
         if (!(d.getAn().getAn() > f.getAn().getAn() + 2)
                 || !(d.getAn().getAn() == f.getAn().getAn() + 2 && d.getMois().getMois() > f.getMois().getMois())
                 || !(d.getAn().getAn() == f.getAn().getAn() + 2 && d.getMois().getMois() == f.getMois().getMois() && d.getJour().getJour() > f.getJour().getJour())){
-            throw new IllegalArgumentException("La date de fermeture ne doit pas être nulle.");
+            throw new IllegalArgumentException("La date en paramètre doit être supérieure d'au moins deux ans que la date de fermeture.");
         }
 
         // Post-conditions
@@ -243,9 +243,9 @@ public class Banque {
 
         // Préconditions
         if (d.getJour().getJour() != dateExFin.getJour().getJour())
-            throw new IllegalArgumentException("Le jour doit correspondre au jour de la date du bilan.");
+            throw new IllegalArgumentException("Le jour en paramètre doit correspondre au jour de la date du bilan.");
         if (d.getMois().getMois() != dateExFin.getMois().getMois())
-            throw new IllegalArgumentException("Le mois doit correspondre au mois de la date du bilan.");
+            throw new IllegalArgumentException("Le mois en paramètre doit correspondre au mois de la date du bilan.");
         if (soldeG != soldeV + entrees - sorties)
             throw new IllegalArgumentException("La vérification des montants doit balancer avant de faire le bilan.");
 

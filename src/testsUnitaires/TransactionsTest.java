@@ -31,9 +31,9 @@ public class TransactionsTest {
     }
 
 
-    ///////////////////////////
-    //  Tests des méthodes   //
-    ///////////////////////////
+    ////////////////////////////////////
+    //  Tests des méthodes publiques  //
+    ////////////////////////////////////
 
     // Transaction interbancaire valide : les arguments respectent les préconditions
     @Test
