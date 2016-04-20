@@ -28,6 +28,7 @@ public class Banque {
     // Constructeur  //
     ///////////////////
     public Banque(Date dateExFin){
+
         // Post-conditions
         comptes = new HashMap<>();
         entrees = 0;
@@ -48,6 +49,7 @@ public class Banque {
             throw new IllegalStateException("Erreur dans la vérification des montants.");
     }
 
+
     ///////////////////////
     // Fonctions Getters //
     ///////////////////////
@@ -55,10 +57,14 @@ public class Banque {
         return comptes;
     }
 
+
     ////////////////////////
     // Méthodes publiques //
     ////////////////////////
+
+    // Méthode permettant d'ouvrir un compte
     public void ouvrirCompte(int soldeInit, NumCompte nc, Date o){
+
         // Préconditions
         if (soldeInit < MIN_SOLDE)
             throw new IllegalArgumentException("Le solde initial ne doit pas être inférieur au solde minimal.");
@@ -77,7 +83,9 @@ public class Banque {
         verifieInvariants();
     }
 
+    // Méthode permettant de fermer un compte
     public void fermerCompte(NumCompte nc, Date f){
+
         // Préconditions
         if (!comptes.containsKey(nc.getNum()))
             throw new IllegalArgumentException("Un compte avec ce numéro n'existe pas.");
@@ -95,7 +103,9 @@ public class Banque {
         verifieInvariants();
     }
 
+    // Méthode permettant de supprimer un compte
     public void supprimerCompte(NumCompte nc, Date d){
+
         // Préconditions
         if (!comptes.containsKey(nc.getNum()))
             throw new IllegalArgumentException("Un compte avec ce numéro n'existe pas.");
@@ -118,7 +128,9 @@ public class Banque {
         verifieInvariants();
     }
 
+    // Méthode permettant de faire un retrait dans un compte de la Banque
     public void retraitC(NumCompte nc, int montantRetrait){
+
         // Préconditions
         if (montantRetrait < 0)
             throw new IllegalArgumentException("Le montant du retrait doit être plus grand que zéro.");
@@ -140,64 +152,108 @@ public class Banque {
         verifieInvariants();
     }
 
+    // Méthode permettant de faire un dépôt (non liquide) dans un compte de la Banque
     public void depotC(NumCompte nc, int montantDepot){
+
         // Préconditions
+        if (montantDepot < 0)
+            throw new IllegalArgumentException("Le montant du dépôt doit être plus grand que zéro.");
+        if (!comptes.containsKey(nc.getNum()))
+            throw new IllegalArgumentException("Un compte avec ce numéro n'existe pas.");
+        if (soldeG + montantDepot != soldeV + entrees + montantDepot - sorties)
+            throw new IllegalArgumentException("La vérification des montants doit balancer après un dépôt.");
 
         // Post-conditions
+        comptes.get(nc.getNum()).depot(montantDepot);
+        entrees += montantDepot;
+        soldeG += montantDepot;
 
         // Vérifie les invariants
         verifieInvariants();
     }
 
+    // Méthode permettant de faire un dépôt (liquide) dans un compte de la Banque
     public void depotLC(NumCompte nc, int montantDepot){
+
         // Préconditions
+        if (montantDepot < 0)
+            throw new IllegalArgumentException("Le montant du dépôt doit être plus grand que zéro.");
+        if (!comptes.containsKey(nc.getNum()))
+            throw new IllegalArgumentException("Un compte avec ce numéro n'existe pas.");
+        if (soldeG + montantDepot != soldeV + entrees + montantDepot - sorties)
+            throw new IllegalArgumentException("La vérification des montants doit balancer après un dépôt.");
+        if (comptes.get(nc.getNum()).getMontantDeposeLiquide() + montantDepot > MAX_DEPOT_LIQUIDE)
+            throw new IllegalArgumentException("L'ajout du dépôt fait dépasser la limite maximal de dépôt liquide.");
 
         // Post-conditions
+        comptes.get(nc.getNum()).depotLiquide(montantDepot);
+        entrees += montantDepot;
+        soldeG += montantDepot;
 
         // Vérifie les invariants
         verifieInvariants();
     }
 
+    // permettant de faire un virement d'argent entre deux comptes de la même Banque
     public void virementC(NumCompte source, NumCompte destinataire, int montantTransfert){
+
         // Préconditions
 
+
         // Post-conditions
+
 
         // Vérifie les invariants
         verifieInvariants();
     }
 
+    // Méthode permettant de modifier le NIP associé à un compte
     public void ch_NIP(NumCompte nc, int nNIP){
+
         // Préconditions
 
+
         // Post-conditions
+
 
         // Vérifie les invariants
         verifieInvariants();
     }
 
+    // Méthode permettant de faire le bilan de vérification à la fin de l'exercice financier
     public void bilanV(Date d){
+
         // Préconditions
 
+
         // Post-conditions
+
 
         // Vérifie les invariants
         verifieInvariants();
     }
 
+    // Méthode permettant d'effectuer le résultat d'une transaction bancaire vers un compte à l'extérieur de la banque
     public void transactionSortante(NumCompte source, int MontantEnvoye){
+
         // Préconditions
 
+
         // Post-conditions
+
 
         // Vérifie les invariants
         verifieInvariants();
     }
 
+    // Méthode permettant d'effectuer le résultat d'une transaction bancaire en provenance d'un compte à l'extérieur de la banque
     public void transactionEntrante(NumCompte destinataire, int montantRecu){
+
         // Préconditions
 
+
         // Post-conditions
+        
 
         // Vérifie les invariants
         verifieInvariants();
