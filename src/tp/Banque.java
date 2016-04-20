@@ -133,7 +133,7 @@ public class Banque {
     public void retraitC(NumCompte nc, int montantRetrait){
 
         // Préconditions
-        if (montantRetrait < 0)
+        if (montantRetrait <= 0)
             throw new IllegalArgumentException("Le montant du retrait doit être plus grand que zéro.");
         if (!comptes.containsKey(nc.getNum()))
             throw new IllegalArgumentException("Un compte avec ce numéro n'existe pas.");
@@ -157,7 +157,7 @@ public class Banque {
     public void depotC(NumCompte nc, int montantDepot){
 
         // Préconditions
-        if (montantDepot < 0)
+        if (montantDepot <= 0)
             throw new IllegalArgumentException("Le montant du dépôt doit être plus grand que zéro.");
         if (!comptes.containsKey(nc.getNum()))
             throw new IllegalArgumentException("Un compte avec ce numéro n'existe pas.");
@@ -177,7 +177,7 @@ public class Banque {
     public void depotLC(NumCompte nc, int montantDepot){
 
         // Préconditions
-        if (montantDepot < 0)
+        if (montantDepot <= 0)
             throw new IllegalArgumentException("Le montant du dépôt doit être plus grand que zéro.");
         if (!comptes.containsKey(nc.getNum()))
             throw new IllegalArgumentException("Un compte avec ce numéro n'existe pas.");
@@ -199,7 +199,7 @@ public class Banque {
     public void virementC(NumCompte source, NumCompte destinataire, int montantTransfert){
 
         // Préconditions
-        if (montantTransfert < 0)
+        if (montantTransfert <= 0)
             throw new IllegalArgumentException("Le montant du transfert doit être plus grand que zéro.");
         if (!comptes.containsKey(source.getNum()))
             throw new IllegalArgumentException("Un compte avec ce numéro n'existe pas.");
@@ -266,13 +266,25 @@ public class Banque {
     }
 
     // Méthode permettant d'effectuer le résultat d'une transaction bancaire vers un compte à l'extérieur de la banque
-    public void transactionSortante(NumCompte source, int MontantEnvoye){
+    public void transactionSortante(NumCompte source, int montantEnvoye){
 
         // Préconditions
-
+        if (montantEnvoye <= 0)
+            throw new IllegalArgumentException("Le montant envoyé doit être plus grand que zéro.");
+        if (!comptes.containsKey(source.getNum()))
+            throw new IllegalArgumentException("Un compte avec ce numéro n'existe pas.");
+        if (comptes.get(source.getNum()).getDateFermeture() != null)
+            throw new IllegalArgumentException("Le compte est déjà fermé.");
+        if (comptes.get(source.getNum()).getSolde() - montantEnvoye - FRAIS_TRANSACTION_SORTANTE < MIN_SOLDE)
+            throw new IllegalArgumentException("Le solde du compte après transaction doit être plus grand ou égal au solde minimum.");
+        if (soldeG - montantEnvoye - FRAIS_TRANSACTION_SORTANTE != soldeV + entrees - (sorties + montantEnvoye + FRAIS_TRANSACTION_SORTANTE))
+            throw new IllegalArgumentException("La vérification des montants doit balancer avant de faire le bilan.");
 
         // Post-conditions
-
+        comptes.get(source.getNum()).retrait(montantEnvoye + FRAIS_TRANSACTION_SORTANTE);
+        soldeG -= montantEnvoye;
+        sorties += montantEnvoye;
+        gains += FRAIS_TRANSACTION_SORTANTE;
 
         // Vérifie les invariants
         verifieInvariants();
@@ -282,10 +294,20 @@ public class Banque {
     public void transactionEntrante(NumCompte destinataire, int montantRecu){
 
         // Préconditions
-
+        if (montantRecu - FRAIS_TRANSACTION_ENTRANTE <= 0)
+            throw new IllegalArgumentException("Le montant reçu moins les frais de transaction doit être plus grand que zéro.");
+        if (!comptes.containsKey(destinataire.getNum()))
+            throw new IllegalArgumentException("Un compte avec ce numéro n'existe pas.");
+        if (comptes.get(destinataire.getNum()).getDateFermeture() != null)
+            throw new IllegalArgumentException("Le compte est déjà fermé.");
+        if (soldeG + montantRecu - FRAIS_TRANSACTION_ENTRANTE != soldeV + (entrees + montantRecu) - (sorties + FRAIS_TRANSACTION_ENTRANTE))
+            throw new IllegalArgumentException("La vérification des montants doit balancer avant de faire le bilan.");
 
         // Post-conditions
-
+        comptes.get(destinataire.getNum()).depot(montantRecu - FRAIS_TRANSACTION_ENTRANTE);
+        soldeG += montantRecu;
+        entrees += montantRecu;
+        gains += FRAIS_TRANSACTION_ENTRANTE;
 
         // Vérifie les invariants
         verifieInvariants();
