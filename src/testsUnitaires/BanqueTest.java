@@ -12,6 +12,11 @@ import static tp.Constantes.*;
  */
 public class BanqueTest {
 
+    ////////////////////////////////////
+    //  Tests des méthodes de Banque  //
+    ///////////////////////////////////
+
+
     @Test
     public void ouvrirCompte() throws Exception {
 
