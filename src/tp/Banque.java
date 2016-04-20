@@ -58,20 +58,68 @@ public class Banque {
     ////////////////////////
     // Méthodes publiques //
     ////////////////////////
-    public void ouvrirCompte(int soldeInit, int nc, Date o){
+    public void ouvrirCompte(int soldeInit, NumCompte nc, Date o){
         // Préconditions
         if(soldeInit < MIN_SOLDE)
             throw new IllegalArgumentException("Le solde initial ne doit pas être inférieur au solde minimal.");
         if(comptes.size() >= MAX_NUM)
             throw new IllegalArgumentException("Le nombre de comptes ne doit pas être supérieur à la limite maximale.");
-        if(comptes.containsKey(NumCompte.GetNumCompte(nc))){
-            throw new IllegalArgumentException("Un compte avec ce numéro existe déjà!.");
+        if(comptes.containsKey(nc.getNum())){
+            throw new IllegalArgumentException("Un compte avec ce numéro existe déjà.");
         }
 
         // Post-conditions
+        entrees += soldeInit;
+        soldeG += soldeInit;
+        comptes.put(nc.getNum(), new Compte(soldeInit, 0, o, null, 0));
 
         // Vérifie les invariants
         verifieInvariants();
     }
 
+    public void fermerCompte(NumCompte nc, Date f){
+        // Préconditions
+        if(!comptes.containsKey(nc.getNum()))
+            throw new IllegalArgumentException("Un compte avec ce numéro n'existe pas.");
+        if(comptes.get(nc.getNum()).getSolde() != MIN_SOLDE)
+            throw new IllegalArgumentException("Pour une fermeture, le solde du compte doit être le solde minimum.");
+        if(comptes.get(nc.getNum()).getDateFermeture() != null)
+            throw new IllegalArgumentException("Le compte est déjà fermé.");
+        if (f == null)
+            throw new IllegalArgumentException("La date de fermeture ne doit pas être nulle.");
+
+        // Post-conditions
+        comptes.get(nc.getNum()).setDateFermeture(f);
+
+        // Vérifie les invariants
+        verifieInvariants();
+    }
+
+    public void supprimerCompte(NumCompte nc, Date d){
+        // Préconditions
+        if(!comptes.containsKey(nc.getNum()))
+            throw new IllegalArgumentException("Un compte avec ce numéro n'existe pas.");
+        if(comptes.get(nc.getNum()).getSolde() != MIN_SOLDE)
+            throw new IllegalArgumentException("Pour une fermeture, le solde du compte doit être le solde minimum.");
+        if(comptes.get(nc.getNum()).getDateFermeture() == null)
+            throw new IllegalArgumentException("Le compte doit avoir une date de fermerture.");
+        // Précondition sur la date d'ouverture
+        Date f = comptes.get(nc.getNum()).getDateOuverture();
+        if (d.getAn().getAn() > f.getAn().getAn() + 2){
+            // OK, ouvert depuis plus de 2 ans
+        }else if (d.getAn().getAn() == f.getAn().getAn() + 2 && d.getMois().getMois() > f.getMois().getMois()){
+            // OK, ouvert depuis plus de 2 ans
+        }else if (d.getAn().getAn() == f.getAn().getAn() + 2 && d.getMois() == f.getMois() && d.getJour().getJour() > f.getJour().getJour()){
+            //  OK, ouvert depuis plus de 2 ans
+        }
+        else {
+            throw new IllegalArgumentException("La date de fermeture ne doit pas être nulle.");
+        }
+
+        // Post-conditions
+        comptes.remove(nc.getNum());
+
+        // Vérifie les invariants
+        verifieInvariants();
+    }
 }
