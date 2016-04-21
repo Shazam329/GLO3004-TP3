@@ -333,42 +333,60 @@ public class BanqueTest {
     // Le montant du transfert doit être plus grand que zéro
     @Test(expected = IllegalArgumentException.class)
     public void test_virementC_montant_invalide() {
-
+        NumCompte source = new NumCompte(10);
+        NumCompte destinataire = new NumCompte(20);
+        banqueTransaction.virementC(source, destinataire, 0);
     }
 
     // Virement invalide :
     // Un compte source avec ce numéro n'existe pas
     @Test(expected = IllegalArgumentException.class)
     public void test_virementC_numCompteSource_invalide() {
-
+        NumCompte source = new NumCompte(1);
+        NumCompte destinataire = new NumCompte(20);
+        banqueTransaction.virementC(source, destinataire, 20);
     }
 
     // Virement invalide :
     // Un compte destinataire avec ce numéro n'existe pas
     @Test(expected = IllegalArgumentException.class)
     public void test_virementC_numCompteDestinataire_invalide() {
-
+        NumCompte source = new NumCompte(10);
+        NumCompte destinataire = new NumCompte(2);
+        banqueTransaction.virementC(source, destinataire, 20);
     }
 
     // Virement invalide :
     // Les numéros des comptes source et destinataire doivent être différents
     @Test(expected = IllegalArgumentException.class)
     public void test_virementC_numComptes_invalide() {
-
+        NumCompte source = new NumCompte(10);
+        NumCompte destinataire = new NumCompte(10);
+        banqueTransaction.virementC(source, destinataire, 20);
     }
 
     // Virement invalide :
     // Le compte est déjà fermé
     @Test(expected = IllegalArgumentException.class)
     public void test_virementC_ferme_invalide() {
+        NumCompte source = new NumCompte(10);
+        NumCompte destinataire = new NumCompte(20);
 
+        Date f = new Date(new Jour(1), new Mois(5), new An(2016));
+        banqueTransaction.fermerCompte(source, f);
+
+        banqueTransaction.virementC(source, destinataire, 20);
     }
 
     // Virement invalide :
     // Le solde du compte moins le transfert doit être plus grand ou égal au solde minimum
     @Test(expected = IllegalArgumentException.class)
     public void test_virementC_solde_invalide() {
+        NumCompte source = new NumCompte(10);
+        NumCompte destinataire = new NumCompte(20);
 
+        int solde = banqueTransaction.getComptes().get(source.getNum()).getSolde();
+        banqueTransaction.virementC(source, destinataire, solde + MIN_SOLDE);
     }
 
     // ----------------------------------------------------------------------------
@@ -386,14 +404,19 @@ public class BanqueTest {
     // Un compte avec ce numéro n'existe pas
     @Test(expected = IllegalArgumentException.class)
     public void test_ch_NIP_numCompte_invalide() {
-
+        NumCompte nc = new NumCompte(1);
+        int nNIP = 12345;
+        banqueTransaction.ch_NIP(nc, nNIP);
     }
 
     // Changer NIP invalide :
     // Le nouveau NIP doit être différent de l'ancien
     @Test(expected = IllegalArgumentException.class)
     public void test_ch_NIP_nouveauNIP_invalide() {
-
+        NumCompte nc = new NumCompte(10);
+        int nNIP = 12345;
+        banqueTransaction.ch_NIP(nc, nNIP);
+        banqueTransaction.ch_NIP(nc, nNIP);
     }
 
     // ----------------------------------------------------------------------------
@@ -410,14 +433,16 @@ public class BanqueTest {
     // Le jour en paramètre doit correspondre au jour de la date du bilan
     @Test(expected = IllegalArgumentException.class)
     public void test_bilanV_jour_invalide() {
-
+        Date d = new Date(new Jour(1), new Mois(12), new An(2016));
+        banqueTransaction.bilanV(d);
     }
 
     // Bilan de vérification invalide :
     // Le mois en paramètre doit correspondre au mois de la date du bilan
     @Test(expected = IllegalArgumentException.class)
     public void test_bilanV_mois_invalide() {
-
+        Date d = new Date(new Jour(31), new Mois(5), new An(2016));
+        banqueTransaction.bilanV(d);
     }
 
     // ----------------------------------------------------------------------------
@@ -434,7 +459,8 @@ public class BanqueTest {
     // Le montant envoyé doit être plus grand que zéro
     @Test(expected = IllegalArgumentException.class)
     public void test_transactionSortante_montant_invalide() {
-
+        NumCompte source = new NumCompte(10);
+        banqueTransaction.transactionSortante(source, 20);
     }
 
     // Transaction sortante invalide :
@@ -465,7 +491,7 @@ public class BanqueTest {
     @Test
     public void test_transactionEntrante_valide() throws Exception {
         NumCompte destinataire = new NumCompte(10);
-        banqueTransaction.transactionSortante(destinataire, 20);
+        banqueTransaction.transactionEntrante(destinataire, 20);
     }
 
     // Transaction entrante invalide :
