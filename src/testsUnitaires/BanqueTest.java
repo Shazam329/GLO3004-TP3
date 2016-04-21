@@ -15,11 +15,17 @@ public class BanqueTest {
 
     private Date dateExFin;
     private Banque banque;
+    private Banque banqueFermeture;
 
     @Before
     public void setUp() {
         dateExFin = new Date(new Jour(31), new Mois(12), new An(2016));
         banque = new Banque(dateExFin);
+        banqueFermeture = new Banque(dateExFin);
+
+        Date o = new Date(new Jour(1), new Mois(4), new An(2016));
+        NumCompte n = new NumCompte(10);
+        banqueFermeture.ouvrirCompte(MIN_SOLDE,n,o);
     }
 
     /////////////////////////////
@@ -92,36 +98,52 @@ public class BanqueTest {
 
     // Fermer compte valide : les arguments respectent les préconditions
     @Test
-    public void test_fermerCompte_valide() {
+    public void test_fermerCompte_valide() throws Exception {
+        NumCompte nc = new NumCompte(10);
+        Date f = new Date(new Jour(1), new Mois(5), new An(2016));
 
+        banqueFermeture.fermerCompte(nc, f);
     }
 
     // Fermer compte invalide :
     // Un compte avec ce numéro n'existe pas
     @Test(expected = IllegalArgumentException.class)
     public void test_fermerCompte_numCompte_invalide() {
+        NumCompte nc = new NumCompte(10000);
+        Date f = new Date(new Jour(1), new Mois(5), new An(2016));
 
+        banqueFermeture.fermerCompte(nc, f);
     }
 
     // Fermer compte invalide :
     // Pour une fermeture, le solde du compte doit être le solde minimum
     @Test(expected = IllegalArgumentException.class)
     public void test_fermerCompte_soldeMin_invalide() {
+        NumCompte nc = new NumCompte(10);
+        Date f = new Date(new Jour(1), new Mois(5), new An(2016));
 
+        banqueFermeture.depotC(nc,1000);
+        banqueFermeture.fermerCompte(nc, f);
     }
 
     // Fermer compte invalide :
     // Le compte est déjà fermé
     @Test(expected = IllegalArgumentException.class)
     public void test_fermerCompte_fermeture_invalide() {
+        NumCompte nc = new NumCompte(10);
+        Date f = new Date(new Jour(1), new Mois(5), new An(2016));
 
+        banqueFermeture.fermerCompte(nc, f);
+        banqueFermeture.fermerCompte(nc, f);
     }
 
     // Fermer compte invalide :
     // La date de fermeture ne doit pas être nulle
     @Test(expected = IllegalArgumentException.class)
     public void test_fermerCompte_date_invalide() {
+        NumCompte nc = new NumCompte(10);
 
+        banqueFermeture.fermerCompte(nc, null);
     }
 
     // ----------------------------------------------------------------------------
@@ -129,7 +151,7 @@ public class BanqueTest {
 
     // Supprimer compte valide : les arguments respectent les préconditions
     @Test
-    public void test_supprimerCompte_valide() {
+    public void test_supprimerCompte_valide() throws Exception {
 
     }
 
@@ -166,7 +188,7 @@ public class BanqueTest {
 
     // Retrait valide : les arguments respectent les préconditions
     @Test
-    public void test_retraitC_valide() {
+    public void test_retraitC_valide() throws Exception {
 
     }
 
@@ -210,7 +232,7 @@ public class BanqueTest {
 
     // Dépôt valide : les arguments respectent les préconditions
     @Test
-    public void test_depotC_valide() {
+    public void test_depotC_valide() throws Exception {
 
     }
 
@@ -240,7 +262,7 @@ public class BanqueTest {
 
     // Dépôt liquide valide : les arguments respectent les préconditions
     @Test
-    public void test_depotLC_valide() {
+    public void test_depotLC_valide() throws Exception {
 
     }
 
@@ -277,7 +299,7 @@ public class BanqueTest {
 
     // Virement valide : les arguments respectent les préconditions
     @Test
-    public void test_virementC_valide() {
+    public void test_virementC_valide() throws Exception {
 
     }
 
@@ -335,7 +357,7 @@ public class BanqueTest {
 
     // Changer NIP valide : les arguments respectent les préconditions
     @Test
-    public void test_ch_NIP_valide() {
+    public void test_ch_NIP_valide() throws Exception {
 
     }
 
@@ -358,7 +380,7 @@ public class BanqueTest {
 
     // Bilan de vérification valide : les arguments respectent les préconditions
     @Test
-    public void test_bilanV_valide() {
+    public void test_bilanV_valide() throws Exception {
 
     }
 
@@ -387,7 +409,7 @@ public class BanqueTest {
 
     // Transaction sortante valide : les arguments respectent les préconditions
     @Test
-    public void test_transactionSortante_valide() {
+    public void test_transactionSortante_valide() throws Exception {
 
     }
 
@@ -430,7 +452,7 @@ public class BanqueTest {
 
     // Transaction entrante valide : les arguments respectent les préconditions
     @Test
-    public void test_transactionEntrante_valide() {
+    public void test_transactionEntrante_valide() throws Exception {
 
     }
 
