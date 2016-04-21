@@ -170,28 +170,48 @@ public class BanqueTest {
     // Un compte avec ce numéro n'existe pas
     @Test(expected = IllegalArgumentException.class)
     public void test_supprimerCompte_numCompte_invalide() {
+        NumCompte nc = new NumCompte(1);
+        Date f = new Date(new Jour(1), new Mois(5), new An(2016));
+        Date d = new Date(new Jour(2), new Mois(5), new An(2018));
 
+        banqueFermeture.fermerCompte(nc, f);
+        banqueFermeture.supprimerCompte(nc, d);
     }
 
     // Supprimer compte invalide :
     // Pour une fermeture, le solde du compte doit être le solde minimum
     @Test(expected = IllegalArgumentException.class)
     public void test_supprimerCompte_soldeMin_invalide() {
+        NumCompte nc = new NumCompte(10);
+        Date f = new Date(new Jour(1), new Mois(5), new An(2016));
+        Date d = new Date(new Jour(2), new Mois(5), new An(2018));
 
+        banqueFermeture.depotC(nc, 100);
+        banqueFermeture.fermerCompte(nc, f);
+        banqueFermeture.supprimerCompte(nc, d);
     }
 
     // Supprimer compte invalide :
     // Le compte doit avoir une date de fermerture
     @Test(expected = IllegalArgumentException.class)
     public void test_supprimerCompte_dateFermeture_invalide() {
+        NumCompte nc = new NumCompte(10);
+        Date f = new Date(new Jour(1), new Mois(5), new An(2016));
+        Date d = new Date(new Jour(2), new Mois(5), new An(2018));
 
+        banqueFermeture.supprimerCompte(nc, d);
     }
 
     // Supprimer compte invalide :
     // La date en paramètre doit être supérieure d'au moins deux ans que la date de fermeture
     @Test(expected = IllegalArgumentException.class)
     public void test_supprimerCompte_date_invalide() {
+        NumCompte nc = new NumCompte(10);
+        Date f = new Date(new Jour(1), new Mois(5), new An(2016));
+        Date d = new Date(new Jour(2), new Mois(5), new An(2017));
 
+        banqueFermeture.fermerCompte(nc, f);
+        banqueFermeture.supprimerCompte(nc, d);
     }
 
     // ----------------------------------------------------------------------------
