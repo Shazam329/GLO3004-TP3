@@ -55,6 +55,12 @@ public class Banque {
     public HashMap<Integer, Compte> getComptes(){
         return comptes;
     }
+    public int getEntrees() { return entrees; }
+    public int getSorties() { return sorties; }
+    public int getSoldeG() { return soldeG; }
+    public int getSoldeV() { return soldeV; }
+    public int getGains() { return gains; }
+    public Date getDateExFin() { return dateExFin; }
 
 
     ////////////////////////
