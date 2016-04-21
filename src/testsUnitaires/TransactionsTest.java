@@ -1,6 +1,7 @@
 package testsUnitaires;
 
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import tp.*;
 import static tp.Constantes.*;
@@ -27,6 +28,8 @@ public class TransactionsTest {
 
     @Before
     public void setUp() {
+
+        System.out.println("TEST TEST TEST");
         b1.ouvrirCompte(MIN_SOLDE, new NumCompte(1), dateOuv);
         b1.ouvrirCompte(MIN_SOLDE + 10, new NumCompte(2), dateOuv);
         b1.ouvrirCompte(MIN_SOLDE + 100, new NumCompte(3), dateOuv);
@@ -39,6 +42,7 @@ public class TransactionsTest {
         b2.ouvrirCompte(MIN_SOLDE + 1000, new NumCompte(40), dateOuv);
         b2.ouvrirCompte(MIN_SOLDE + 1000, new NumCompte(50), dateOuv);
 
+
         banques.put(new NumBanque(1), b1);
         banques.put(new NumBanque(2), b2);
     }
@@ -46,6 +50,9 @@ public class TransactionsTest {
     // Constructeur valide : les arguments respectent les préconditions
     @Test
     public void test_TransactionsConstructeur_valide() {
+        if(banques == null){
+            System.out.println("NULL");
+        }
         this.t = new Transactions(banques);
 
     }

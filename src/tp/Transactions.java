@@ -19,7 +19,7 @@ public class Transactions {
     ///////////////////////
     // Variables membres //
     ///////////////////////
-    private HashMap<NumBanque, Banque> banques;
+    private HashMap<NumBanque, Banque> banques = new HashMap<>();
     private int sortiesC;
     private int depotsC;
     private int frais;
@@ -37,7 +37,6 @@ public class Transactions {
         Set banquesSet = new HashSet<Banque>(banques.values());
         if (banques.values().size() != banquesSet.size())
             throw new IllegalStateException("Une banque ne peut être associée à deux numéros différents.");
-
 
         // Post-conditions
         this.banques = b;
