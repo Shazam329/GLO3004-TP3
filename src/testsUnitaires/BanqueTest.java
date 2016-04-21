@@ -12,6 +12,9 @@ import static tp.Constantes.*;
  */
 public class BanqueTest {
 
+    private Date dateExFin = new Date(new Jour(31), new Mois(12), new An(2016));
+    private Banque banque = new Banque(dateExFin);
+
     /////////////////////////////
     //  Tests du constructeur  //
     /////////////////////////////
@@ -21,6 +24,15 @@ public class BanqueTest {
     @Test
     public void test_BanqueConstructeur_Valide() {
 
+        Banque b = new Banque(dateExFin);
+
+        assertTrue(b.getComptes().isEmpty());
+        assertEquals(b.getEntrees(), 0);
+        assertEquals(b.getSorties(), 0);
+        assertEquals(b.getSoldeG(), 0);
+        assertEquals(b.getSoldeV(), 0);
+        assertEquals(b.getGains(), 0);
+        assertEquals(b.getDateExFin(), dateExFin);
     }
 
     ////////////////////////////////////
@@ -30,7 +42,7 @@ public class BanqueTest {
     // Ouvrir compte valide : les arguments respectent les préconditions
     @Test
     public void test_ouvrirCompte_valide() {
-
+        
     }
 
     // Ouvrir compte invalide :
