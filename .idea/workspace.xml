@@ -31,11 +31,23 @@
     <splitter split-orientation="horizontal" split-proportion="0.40272027">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file leaf-file-name="BanqueTest.java" pinned="false" current-in-tab="true">
+          <file leaf-file-name="Main.java" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/src/tp/Main.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="0">
+                  <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+                  <folding>
+                    <element signature="e#0#2575#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="BanqueTest.java" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/testsUnitaires/BanqueTest.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="933">
-                  <caret line="419" column="1" selection-start-line="419" selection-start-column="1" selection-end-line="419" selection-end-column="1" />
+                <state relative-caret-position="187">
+                  <caret line="11" column="3" selection-start-line="11" selection-start-column="3" selection-end-line="11" selection-end-column="3" />
                   <folding>
                     <element signature="imports" expanded="true" />
                   </folding>
@@ -46,8 +58,8 @@
           <file leaf-file-name="TransactionsTest.java" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/testsUnitaires/TransactionsTest.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="357">
-                  <caret line="21" column="9" selection-start-line="21" selection-start-column="9" selection-end-line="21" selection-end-column="52" />
+                <state relative-caret-position="1904">
+                  <caret line="112" column="1" selection-start-line="112" selection-start-column="1" selection-end-line="112" selection-end-column="1" />
                   <folding />
                 </state>
               </provider>
@@ -56,7 +68,7 @@
           <file leaf-file-name="CompteTest.java" pinned="true" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/testsUnitaires/CompteTest.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-835">
+                <state relative-caret-position="561">
                   <caret line="33" column="9" selection-start-line="33" selection-start-column="9" selection-end-line="33" selection-end-column="52" />
                   <folding>
                     <element signature="imports" expanded="true" />
@@ -81,7 +93,7 @@
       </split-first>
       <split-second>
         <leaf>
-          <file leaf-file-name="Banque.java" pinned="true" current-in-tab="true">
+          <file leaf-file-name="Banque.java" pinned="true" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/tp/Banque.java">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="746">
@@ -93,10 +105,10 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="Transactions.java" pinned="false" current-in-tab="false">
+          <file leaf-file-name="Transactions.java" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/tp/Transactions.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="680">
+                <state relative-caret-position="1700">
                   <caret line="102" column="130" selection-start-line="102" selection-start-column="48" selection-end-line="102" selection-end-column="130" />
                   <folding>
                     <element signature="imports" expanded="true" />
@@ -137,7 +149,6 @@
         <option value="$APPLICATION_HOME_DIR$/lib/junit-4.12.jar!/org/junit/internal/runners/model/ReflectiveCallable.class" />
         <option value="$PROJECT_DIR$/src/testsUnitaires/DateTest.java" />
         <option value="$PROJECT_DIR$/src/tp/Constantes.java" />
-        <option value="$PROJECT_DIR$/src/tp/Main.java" />
         <option value="$PROJECT_DIR$/src/testsUnitaires/CompteTest.java" />
         <option value="$PROJECT_DIR$/src/tp/Compte.java" />
         <option value="$PROJECT_DIR$/src/tp/NumCompte.java" />
@@ -147,6 +158,7 @@
         <option value="$PROJECT_DIR$/src/testsUnitaires/TransactionsTest.java" />
         <option value="$PROJECT_DIR$/src/tp/Banque.java" />
         <option value="$PROJECT_DIR$/src/testsUnitaires/BanqueTest.java" />
+        <option value="$PROJECT_DIR$/src/tp/Main.java" />
       </list>
     </option>
   </component>
@@ -1052,14 +1064,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/tp/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="11" selection-start-line="0" selection-start-column="11" selection-end-line="0" selection-end-column="11" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/tp/NumBanque.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="357">
@@ -1094,34 +1098,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/testsUnitaires/CompteTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-835">
-          <caret line="33" column="9" selection-start-line="33" selection-start-column="9" selection-end-line="33" selection-end-column="52" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/tp/Transactions.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="680">
-          <caret line="102" column="130" selection-start-line="102" selection-start-column="48" selection-end-line="102" selection-end-column="130" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/testsUnitaires/TransactionsTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="21" column="9" selection-start-line="21" selection-start-column="9" selection-end-line="21" selection-end-column="52" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/tp/Banque.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="746">
@@ -1132,12 +1108,50 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/testsUnitaires/BanqueTest.java">
+    <entry file="file://$PROJECT_DIR$/src/tp/Transactions.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="933">
-          <caret line="419" column="1" selection-start-line="419" selection-start-column="1" selection-end-line="419" selection-end-column="1" />
+        <state relative-caret-position="1700">
+          <caret line="102" column="130" selection-start-line="102" selection-start-column="48" selection-end-line="102" selection-end-column="130" />
           <folding>
             <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/testsUnitaires/CompteTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="561">
+          <caret line="33" column="9" selection-start-line="33" selection-start-column="9" selection-end-line="33" selection-end-column="52" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/testsUnitaires/BanqueTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="11" column="3" selection-start-line="11" selection-start-column="3" selection-end-line="11" selection-end-column="3" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/testsUnitaires/TransactionsTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1904">
+          <caret line="112" column="1" selection-start-line="112" selection-start-column="1" selection-end-line="112" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/tp/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#2575#0" expanded="true" />
           </folding>
         </state>
       </provider>

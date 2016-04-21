@@ -1,3 +1,21 @@
+
+//*******************************************************************************
+//* Authors:
+//*	#1
+//*	Nom			Barrigas-Bernard, Keven
+//*	Matricule	111 080 771
+//*	Programme	Informatique
+//*	#2
+//*	Nom			Collins, Francis
+//*	Matricule	909 236 993
+//*	Programme	Informatique
+//*	#3
+//*	Nom			L'Écuyer, Mathieu
+//*	Matricule   111 078 093
+//*	Programme	Informatique
+//*******************************************************************************
+
+
 package tp;
 
 import com.sun.istack.internal.NotNull;
