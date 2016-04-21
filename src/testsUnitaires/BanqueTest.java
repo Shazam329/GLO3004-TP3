@@ -460,28 +460,38 @@ public class BanqueTest {
     @Test(expected = IllegalArgumentException.class)
     public void test_transactionSortante_montant_invalide() {
         NumCompte source = new NumCompte(10);
-        banqueTransaction.transactionSortante(source, 20);
+        banqueTransaction.transactionSortante(source, 0);
     }
 
     // Transaction sortante invalide :
     // Un compte avec ce numéro n'existe pas
     @Test(expected = IllegalArgumentException.class)
     public void test_transactionSortante_numCompte_invalide() {
-
+        NumCompte source = new NumCompte(1);
+        banqueTransaction.transactionSortante(source, 20);
     }
 
     // Transaction sortante invalide :
     // Le compte est déjà fermé
     @Test(expected = IllegalArgumentException.class)
     public void test_transactionSortante_ferme_invalide() {
+        NumCompte source = new NumCompte(10);
 
+        Date f = new Date(new Jour(1), new Mois(5), new An(2016));
+        banqueTransaction.fermerCompte(source, f);
+
+        banqueTransaction.transactionSortante(source, 20);
     }
 
     // Transaction sortante invalide :
     // Le solde du compte après transaction doit être plus grand ou égal au solde minimum
     @Test(expected = IllegalArgumentException.class)
     public void test_transactionSortante_soldeMin_invalide() {
+        NumCompte source = new NumCompte(10);
 
+        int solde = banqueTransaction.getComptes().get(source.getNum()).getSolde();
+
+        banqueTransaction.transactionSortante(source, solde);
     }
 
     // ----------------------------------------------------------------------------
@@ -498,20 +508,27 @@ public class BanqueTest {
     // Le montant reçu moins les frais de transaction doit être plus grand que zéro
     @Test(expected = IllegalArgumentException.class)
     public void test_transactionEntrante_montant_invalide() {
-
+        NumCompte destinataire = new NumCompte(10);
+        banqueTransaction.transactionEntrante(destinataire, FRAIS_TRANSACTION_ENTRANTE);
     }
 
     // Transaction entrante invalide :
     // Un compte avec ce numéro n'existe pas
     @Test(expected = IllegalArgumentException.class)
     public void test_transactionEntrante_numCompte_invalide() {
-
+        NumCompte destinataire = new NumCompte(2);
+        banqueTransaction.transactionEntrante(destinataire, 20);
     }
 
     // Transaction entrante invalide :
     // Le compte est déjà fermé
     @Test(expected = IllegalArgumentException.class)
     public void test_transactionEntrante_ferme_invalide() {
+        NumCompte destinataire = new NumCompte(10);
 
+        Date f = new Date(new Jour(1), new Mois(5), new An(2016));
+        banqueTransaction.fermerCompte(destinataire, f);
+
+        banqueTransaction.transactionEntrante(destinataire, 20);
     }
 }
