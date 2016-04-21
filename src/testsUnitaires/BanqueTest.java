@@ -16,16 +16,22 @@ public class BanqueTest {
     private Date dateExFin;
     private Banque banque;
     private Banque banqueFermeture;
+    private Banque banqueTransaction;
 
     @Before
     public void setUp() {
         dateExFin = new Date(new Jour(31), new Mois(12), new An(2016));
         banque = new Banque(dateExFin);
         banqueFermeture = new Banque(dateExFin);
+        banqueTransaction = new Banque(dateExFin);
 
         Date o = new Date(new Jour(1), new Mois(4), new An(2016));
-        NumCompte n = new NumCompte(10);
-        banqueFermeture.ouvrirCompte(MIN_SOLDE,n,o);
+        NumCompte n1 = new NumCompte(10);
+        NumCompte n2 = new NumCompte(20);
+
+        banqueFermeture.ouvrirCompte(MIN_SOLDE,n1,o);
+        banqueTransaction.ouvrirCompte(10000,n1,o);
+        banqueTransaction.ouvrirCompte(10000,n2,o);
     }
 
     /////////////////////////////
@@ -154,7 +160,7 @@ public class BanqueTest {
     public void test_supprimerCompte_valide() throws Exception {
         NumCompte nc = new NumCompte(10);
         Date f = new Date(new Jour(1), new Mois(5), new An(2016));
-        Date d = new Date(new Jour(1), new Mois(5), new An(2020));
+        Date d = new Date(new Jour(2), new Mois(5), new An(2018));
 
         banqueFermeture.fermerCompte(nc, f);
         banqueFermeture.supprimerCompte(nc, d);
@@ -194,7 +200,8 @@ public class BanqueTest {
     // Retrait valide : les arguments respectent les préconditions
     @Test
     public void test_retraitC_valide() throws Exception {
-
+        NumCompte nc = new NumCompte(10);
+        banqueTransaction.retraitC(nc, 100);
     }
 
     // Retrait invalide :
@@ -238,7 +245,8 @@ public class BanqueTest {
     // Dépôt valide : les arguments respectent les préconditions
     @Test
     public void test_depotC_valide() throws Exception {
-
+        NumCompte nc = new NumCompte(10);
+        banqueTransaction.depotC(nc, 100);
     }
 
     // Dépôt invalide :
@@ -268,7 +276,8 @@ public class BanqueTest {
     // Dépôt liquide valide : les arguments respectent les préconditions
     @Test
     public void test_depotLC_valide() throws Exception {
-
+        NumCompte nc = new NumCompte(10);
+        banqueTransaction.depotC(nc, 100);
     }
 
     // Dépôt liquide invalide :
@@ -305,7 +314,9 @@ public class BanqueTest {
     // Virement valide : les arguments respectent les préconditions
     @Test
     public void test_virementC_valide() throws Exception {
-
+        NumCompte source = new NumCompte(10);
+        NumCompte destinataire = new NumCompte(20);
+        banqueTransaction.virementC(source, destinataire, 20);
     }
 
     // Virement invalide :
@@ -363,7 +374,9 @@ public class BanqueTest {
     // Changer NIP valide : les arguments respectent les préconditions
     @Test
     public void test_ch_NIP_valide() throws Exception {
-
+        NumCompte nc = new NumCompte(10);
+        int nNIP = 12345;
+        banqueTransaction.ch_NIP(nc, nNIP);
     }
 
     // Changer NIP invalide :
@@ -386,7 +399,8 @@ public class BanqueTest {
     // Bilan de vérification valide : les arguments respectent les préconditions
     @Test
     public void test_bilanV_valide() throws Exception {
-
+        Date d = new Date(new Jour(31), new Mois(12), new An(2016));
+        banqueTransaction.bilanV(d);
     }
 
     // Bilan de vérification invalide :
@@ -415,7 +429,8 @@ public class BanqueTest {
     // Transaction sortante valide : les arguments respectent les préconditions
     @Test
     public void test_transactionSortante_valide() throws Exception {
-
+        NumCompte source = new NumCompte(10);
+        banqueTransaction.transactionSortante(source, 20);
     }
 
     // Transaction sortante invalide :
@@ -458,7 +473,8 @@ public class BanqueTest {
     // Transaction entrante valide : les arguments respectent les préconditions
     @Test
     public void test_transactionEntrante_valide() throws Exception {
-
+        NumCompte destinataire = new NumCompte(10);
+        banqueTransaction.transactionSortante(destinataire, 20);
     }
 
     // Transaction entrante invalide :

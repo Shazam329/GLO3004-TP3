@@ -145,7 +145,7 @@ public class Banque {
             throw new IllegalArgumentException("Le compte ne doit pas avoir une date de fermerture.");
         if (comptes.get(nc.getNum()).getSolde() - montantRetrait < MIN_SOLDE)
             throw new IllegalArgumentException("Le solde du compte moins le retrait doit être plus grand ou égal au solde minimum.");
-        if (soldeG - montantRetrait != soldeV + entrees - sorties + montantRetrait)
+        if ((soldeG - montantRetrait) != soldeV + entrees - (sorties + montantRetrait))
             throw new IllegalArgumentException("La vérification des montants doit balancer après un retrait.");
 
         // Post-conditions
@@ -165,7 +165,7 @@ public class Banque {
             throw new IllegalArgumentException("Le montant du dépôt doit être plus grand que zéro.");
         if (!comptes.containsKey(nc.getNum()))
             throw new IllegalArgumentException("Un compte avec ce numéro n'existe pas.");
-        if (soldeG + montantDepot != soldeV + entrees + montantDepot - sorties)
+        if ((soldeG + montantDepot) != soldeV + (entrees + montantDepot) - sorties)
             throw new IllegalArgumentException("La vérification des montants doit balancer après un dépôt.");
 
         // Post-conditions
@@ -185,7 +185,7 @@ public class Banque {
             throw new IllegalArgumentException("Le montant du dépôt doit être plus grand que zéro.");
         if (!comptes.containsKey(nc.getNum()))
             throw new IllegalArgumentException("Un compte avec ce numéro n'existe pas.");
-        if (soldeG + montantDepot != soldeV + entrees + montantDepot - sorties)
+        if ((soldeG + montantDepot) != soldeV + (entrees + montantDepot) - sorties)
             throw new IllegalArgumentException("La vérification des montants doit balancer après un dépôt.");
         if (comptes.get(nc.getNum()).getMontantDeposeLiquide() + montantDepot > MAX_DEPOT_LIQUIDE)
             throw new IllegalArgumentException("L'ajout du dépôt fait dépasser la limite maximal de dépôt liquide.");
@@ -215,7 +215,7 @@ public class Banque {
             throw new IllegalArgumentException("Le compte est déjà fermé.");
         if (comptes.get(source.getNum()).getSolde() - montantTransfert < MIN_SOLDE)
             throw new IllegalArgumentException("Le solde du compte moins le transfert doit être plus grand ou égal au solde minimum.");
-        if (soldeG + montantTransfert - montantTransfert != soldeV + (entrees + montantTransfert) - (sorties + montantTransfert))
+        if ((soldeG + montantTransfert - montantTransfert) != soldeV + (entrees + montantTransfert) - (sorties + montantTransfert))
             throw new IllegalArgumentException("La vérification des montants doit balancer après un transfert.");
 
         // Post-conditions
@@ -281,7 +281,7 @@ public class Banque {
             throw new IllegalArgumentException("Le compte est déjà fermé.");
         if (comptes.get(source.getNum()).getSolde() - montantEnvoye - FRAIS_TRANSACTION_SORTANTE < MIN_SOLDE)
             throw new IllegalArgumentException("Le solde du compte après transaction doit être plus grand ou égal au solde minimum.");
-        if (soldeG - montantEnvoye - FRAIS_TRANSACTION_SORTANTE != soldeV + entrees - (sorties + montantEnvoye + FRAIS_TRANSACTION_SORTANTE))
+        if ((soldeG - montantEnvoye - FRAIS_TRANSACTION_SORTANTE) != soldeV + entrees - (sorties + montantEnvoye + FRAIS_TRANSACTION_SORTANTE))
             throw new IllegalArgumentException("La vérification des montants doit balancer avant de faire le bilan.");
 
         // Post-conditions
@@ -304,7 +304,7 @@ public class Banque {
             throw new IllegalArgumentException("Un compte avec ce numéro n'existe pas.");
         if (comptes.get(destinataire.getNum()).getDateFermeture() != null)
             throw new IllegalArgumentException("Le compte est déjà fermé.");
-        if (soldeG + montantRecu - FRAIS_TRANSACTION_ENTRANTE != soldeV + (entrees + montantRecu) - (sorties + FRAIS_TRANSACTION_ENTRANTE))
+        if ((soldeG + montantRecu - FRAIS_TRANSACTION_ENTRANTE) != soldeV + (entrees + montantRecu) - (sorties + FRAIS_TRANSACTION_ENTRANTE))
             throw new IllegalArgumentException("La vérification des montants doit balancer avant de faire le bilan.");
 
         // Post-conditions
