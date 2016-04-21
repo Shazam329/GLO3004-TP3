@@ -120,9 +120,9 @@ public class Banque {
             throw new IllegalArgumentException("Le compte doit avoir une date de fermerture.");
         // Précondition sur la date d'ouverture
         Date f = comptes.get(nc.getNum()).getDateFermeture();
-        if (!(d.getAn().getAn() > f.getAn().getAn() + 2)
-                || !(d.getAn().getAn() == f.getAn().getAn() + 2 && d.getMois().getMois() > f.getMois().getMois())
-                || !(d.getAn().getAn() == f.getAn().getAn() + 2 && d.getMois().getMois() == f.getMois().getMois() && d.getJour().getJour() > f.getJour().getJour())){
+        if (!((d.getAn().getAn() > f.getAn().getAn() + 2)
+                || (d.getAn().getAn() == f.getAn().getAn() + 2 && d.getMois().getMois() > f.getMois().getMois())
+                || (d.getAn().getAn() == f.getAn().getAn() + 2 && d.getMois().getMois() == f.getMois().getMois() && d.getJour().getJour() > f.getJour().getJour()))){
             throw new IllegalArgumentException("La date en paramètre doit être supérieure d'au moins deux ans que la date de fermeture.");
         }
 
