@@ -1,6 +1,9 @@
 package testsUnitaires;
 
 import org.junit.Test;
+import tp.*;
+
+import java.util.HashMap;
 
 /**
  *  Nom de la classe: TransactionTest
@@ -11,6 +14,11 @@ public class TransactionsTest {
     /////////////////////////////
     //  Tests du constructeur  //
     /////////////////////////////
+    private Date dateOuv = new Date(new Jour(1), new Mois(4), new An(2016));
+    private Date dateExFin = new Date(new Jour(31), new Mois(12), new An(2016));
+    private Banque b1 = new Banque(dateExFin);
+    private Banque b2 = new Banque(dateExFin);
+    private HashMap<NumBanque, Banque> banques = new HashMap<>();
 
     // Constructeur valide : les arguments respectent les préconditions
     @Test
