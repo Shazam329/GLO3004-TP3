@@ -11,7 +11,7 @@ public class NumBanque {
     // Variables membres
     private final int nc;
     // Constructeur
-    NumBanque(int nc){
+    public NumBanque(int nc){
         if (nc < 1 || nc > MAX_NUM)
             throw new IllegalArgumentException("Le numéro de compte doit être compris dans la plage permise.");
         this.nc = nc;

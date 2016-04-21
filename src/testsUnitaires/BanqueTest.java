@@ -1,5 +1,6 @@
 package testsUnitaires;
 
+import org.junit.Before;
 import org.junit.Test;
 import tp.*;
 
@@ -12,8 +13,14 @@ import static tp.Constantes.*;
  */
 public class BanqueTest {
 
-    private Date dateExFin = new Date(new Jour(31), new Mois(12), new An(2016));
-    private Banque banque = new Banque(dateExFin);
+    private Date dateExFin;
+    private Banque banque;
+
+    @Before
+    public void setUp() {
+        dateExFin = new Date(new Jour(31), new Mois(12), new An(2016));
+        banque = new Banque(dateExFin);
+    }
 
     /////////////////////////////
     //  Tests du constructeur  //
@@ -23,16 +30,13 @@ public class BanqueTest {
     // Pas de préconditions à valider
     @Test
     public void test_BanqueConstructeur_Valide() {
-
-        Banque b = new Banque(dateExFin);
-
-        assertTrue(b.getComptes().isEmpty());
-        assertEquals(b.getEntrees(), 0);
-        assertEquals(b.getSorties(), 0);
-        assertEquals(b.getSoldeG(), 0);
-        assertEquals(b.getSoldeV(), 0);
-        assertEquals(b.getGains(), 0);
-        assertEquals(b.getDateExFin(), dateExFin);
+        assertTrue(banque.getComptes().isEmpty());
+        assertEquals(banque.getEntrees(), 0);
+        assertEquals(banque.getSorties(), 0);
+        assertEquals(banque.getSoldeG(), 0);
+        assertEquals(banque.getSoldeV(), 0);
+        assertEquals(banque.getGains(), 0);
+        assertEquals(banque.getDateExFin(), dateExFin);
     }
 
     ////////////////////////////////////
@@ -41,15 +45,19 @@ public class BanqueTest {
 
     // Ouvrir compte valide : les arguments respectent les préconditions
     @Test
-    public void test_ouvrirCompte_valide() {
-        
+    public void test_ouvrirCompte_valide() throws Exception {
+        int soldeInit = 100000;
+        NumCompte nc = new NumCompte(10);
+        Date o = new Date(new Jour(20), new Mois(4), new An(2016));
+
+        banque.ouvrirCompte(soldeInit, nc, o);
     }
 
     // Ouvrir compte invalide :
     // Le solde initial ne doit pas être inférieur au solde minimal
     @Test(expected = IllegalArgumentException.class)
     public void test_ouvrirCompte_soldeInit_invalide() {
-
+        
     }
 
     // Ouvrir compte invalide :
