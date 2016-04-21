@@ -11,6 +11,7 @@ import static tp.Constantes.*;
  *  Description: Tests unitaires de la classe Compte
  */
 public class CompteTest {
+
     /////////////////////////////
     //  Tests du constructeur  //
     /////////////////////////////
