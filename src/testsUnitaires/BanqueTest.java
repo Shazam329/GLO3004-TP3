@@ -228,35 +228,34 @@ public class BanqueTest {
     // Le montant du retrait doit être plus grand que zéro
     @Test(expected = IllegalArgumentException.class)
     public void test_retraitC_montant_invalide() {
-
+        NumCompte nc = new NumCompte(10);
+        banqueTransaction.retraitC(nc, 0);
     }
 
     // Retrait invalide :
     // Un compte avec ce numéro n'existe pas
     @Test(expected = IllegalArgumentException.class)
     public void test_retraitC_numCompte_invalide() {
-
+        NumCompte nc = new NumCompte(1);
+        banqueTransaction.retraitC(nc, 100);
     }
 
     // Retrait invalide :
     // Le compte ne doit pas avoir une date de fermerture
     @Test(expected = IllegalArgumentException.class)
     public void test_retraitC_dateFermeture_invalide() {
-
+        NumCompte nc = new NumCompte(10);
+        Date f = new Date(new Jour(1), new Mois(5), new An(2016));
+        banqueTransaction.fermerCompte(nc, f);
+        banqueTransaction.retraitC(nc, 100);
     }
 
     // Retrait invalide :
     // Le solde du compte moins le retrait doit être plus grand ou égal au solde minimum
     @Test(expected = IllegalArgumentException.class)
     public void test_retraitC_solde_invalide() {
-
-    }
-
-    // Retrait invalide :
-    // La vérification des montants doit balancer après un retrait
-    @Test(expected = IllegalArgumentException.class)
-    public void test_retraitC_balance_invalide() {
-
+        NumCompte nc = new NumCompte(10);
+        banqueTransaction.retraitC(nc, 10000 + MIN_SOLDE);
     }
 
     // ----------------------------------------------------------------------------
@@ -273,21 +272,16 @@ public class BanqueTest {
     // Le montant du dépôt doit être plus grand que zéro
     @Test(expected = IllegalArgumentException.class)
     public void test_depotC_montant_invalide() {
-
+        NumCompte nc = new NumCompte(10);
+        banqueTransaction.depotC(nc, 0);
     }
 
     // Dépôt invalide :
     // Un compte avec ce numéro n'existe pas
     @Test(expected = IllegalArgumentException.class)
     public void test_depotC_numCompte_invalide() {
-
-    }
-
-    // Dépôt invalide :
-    // La vérification des montants doit balancer après un dépôt
-    @Test(expected = IllegalArgumentException.class)
-    public void test_depotC_balance_invalide() {
-
+        NumCompte nc = new NumCompte(1);
+        banqueTransaction.depotC(nc, 100);
     }
 
     // ----------------------------------------------------------------------------
@@ -297,35 +291,31 @@ public class BanqueTest {
     @Test
     public void test_depotLC_valide() throws Exception {
         NumCompte nc = new NumCompte(10);
-        banqueTransaction.depotC(nc, 100);
+        banqueTransaction.depotLC(nc, 100);
     }
 
     // Dépôt liquide invalide :
     // Le montant du dépôt doit être plus grand que zéro
     @Test(expected = IllegalArgumentException.class)
     public void test_depotLC_montant_invalide() {
-
+        NumCompte nc = new NumCompte(10);
+        banqueTransaction.depotLC(nc, 0);
     }
 
     // Dépôt liquide invalide :
     // Un compte avec ce numéro n'existe pas
     @Test(expected = IllegalArgumentException.class)
     public void test_depotLC_numCompte_invalide() {
-
+        NumCompte nc = new NumCompte(1);
+        banqueTransaction.depotLC(nc, 100);
     }
 
     // Dépôt liquide invalide :
     // L'ajout du dépôt fait dépasser la limite maximal de dépôt liquide
     @Test(expected = IllegalArgumentException.class)
     public void test_depotLC_limite_invalide() {
-
-    }
-
-    // Dépôt liquide invalide :
-    // La vérification des montants doit balancer après un dépôt
-    @Test(expected = IllegalArgumentException.class)
-    public void test_depotLC_balance_invalide() {
-
+        NumCompte nc = new NumCompte(10);
+        banqueTransaction.depotLC(nc, 1 + MAX_DEPOT_LIQUIDE);
     }
 
     // ----------------------------------------------------------------------------
@@ -381,13 +371,6 @@ public class BanqueTest {
 
     }
 
-    // Virement invalide :
-    // La vérification des montants doit balancer après un transfert
-    @Test(expected = IllegalArgumentException.class)
-    public void test_virementC_balance_invalide() {
-
-    }
-
     // ----------------------------------------------------------------------------
 
 
@@ -437,14 +420,8 @@ public class BanqueTest {
 
     }
 
-    // Bilan de vérification invalide :
-    // La vérification des montants doit balancer avant de faire le bilan
-    @Test(expected = IllegalArgumentException.class)
-    public void test_bilanV_balance_invalide() {
-
-    }
-
     // ----------------------------------------------------------------------------
+
 
     // Transaction sortante valide : les arguments respectent les préconditions
     @Test
@@ -481,14 +458,8 @@ public class BanqueTest {
 
     }
 
-    // Transaction sortante invalide :
-    // La vérification des montants doit balancer avant de faire le bilan
-    @Test(expected = IllegalArgumentException.class)
-    public void test_transactionSortante_balance_invalide() {
-
-    }
-
     // ----------------------------------------------------------------------------
+
 
     // Transaction entrante valide : les arguments respectent les préconditions
     @Test
@@ -515,13 +486,6 @@ public class BanqueTest {
     // Le compte est déjà fermé
     @Test(expected = IllegalArgumentException.class)
     public void test_transactionEntrante_ferme_invalide() {
-
-    }
-
-    // Transaction entrante invalide :
-    // La vérification des montants doit balancer avant de faire le bilan
-    @Test(expected = IllegalArgumentException.class)
-    public void test_transactionEntrante_balance_invalide() {
 
     }
 }
