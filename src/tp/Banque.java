@@ -119,7 +119,7 @@ public class Banque {
         if (comptes.get(nc.getNum()).getDateFermeture() == null)
             throw new IllegalArgumentException("Le compte doit avoir une date de fermerture.");
         // Précondition sur la date d'ouverture
-        Date f = comptes.get(nc.getNum()).getDateOuverture();
+        Date f = comptes.get(nc.getNum()).getDateFermeture();
         if (!(d.getAn().getAn() > f.getAn().getAn() + 2)
                 || !(d.getAn().getAn() == f.getAn().getAn() + 2 && d.getMois().getMois() > f.getMois().getMois())
                 || !(d.getAn().getAn() == f.getAn().getAn() + 2 && d.getMois().getMois() == f.getMois().getMois() && d.getJour().getJour() > f.getJour().getJour())){

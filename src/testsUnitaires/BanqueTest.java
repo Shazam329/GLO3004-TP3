@@ -152,7 +152,12 @@ public class BanqueTest {
     // Supprimer compte valide : les arguments respectent les préconditions
     @Test
     public void test_supprimerCompte_valide() throws Exception {
+        NumCompte nc = new NumCompte(10);
+        Date f = new Date(new Jour(1), new Mois(5), new An(2016));
+        Date d = new Date(new Jour(1), new Mois(5), new An(2020));
 
+        banqueFermeture.fermerCompte(nc, f);
+        banqueFermeture.supprimerCompte(nc, d);
     }
 
     // Supprimer compte invalide :
