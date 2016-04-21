@@ -19,7 +19,7 @@ public class Transactions {
     ///////////////////////
     // Variables membres //
     ///////////////////////
-    private HashMap<NumBanque, Banque> banques = new HashMap<>();
+    private HashMap<Integer, Banque> banques = new HashMap<>();
     private int sortiesC;
     private int depotsC;
     private int frais;
@@ -28,7 +28,7 @@ public class Transactions {
     ///////////////////
     // Constructeur  //
     ///////////////////
-    public Transactions(HashMap<NumBanque, Banque> b){
+    public Transactions(HashMap<Integer, Banque> b){
 
         // Préconditions
         if (b.size() < 2 || b.size() > MAX_BANQUE)
@@ -58,7 +58,7 @@ public class Transactions {
         if (sortiesC != depotsC + frais)
             throw new IllegalStateException("Erreur dans la vérification des montants.");
 
-        Set banquesSet = new HashSet<Banque>(banques.values());
+        Set banquesSet = new HashSet<>(banques.values());
         if (banques.values().size() != banquesSet.size())
             throw new IllegalStateException("Une banque ne peut être associée à deux numéros différents.");
     }
@@ -67,7 +67,7 @@ public class Transactions {
     ///////////////////////
     // Fonctions Getters //
     ///////////////////////
-    public HashMap<NumBanque, Banque> getBanques(){
+    public HashMap<Integer, Banque> getBanques(){
         return banques;
     }
 
@@ -86,25 +86,25 @@ public class Transactions {
             throw new IllegalArgumentException("Le montant moins les frais de transaction doit être plus grand que zéro.");
         if (b1.getNum() == b2.getNum())
             throw new IllegalArgumentException("Les numéros des deux banques doivent être différents.");
-        if (!banques.containsKey(b1))
+        if (!banques.containsKey(b1.getNum()))
             throw new IllegalArgumentException("Cette banque n'existe pas.");
-        if (!banques.containsKey(b2))
+        if (!banques.containsKey(b2.getNum()))
             throw new IllegalArgumentException("Cette banque n'existe pas.");
-        if (!banques.get(b1).getComptes().containsKey(nc1.getNum()))
+        if (!banques.get(b1.getNum()).getComptes().containsKey(nc1.getNum()))
             throw new IllegalArgumentException("Un compte avec ce numéro n'existe pas.");
-        if (!banques.get(b2).getComptes().containsKey(nc2.getNum()))
+        if (!banques.get(b2.getNum()).getComptes().containsKey(nc2.getNum()))
             throw new IllegalArgumentException("Un compte avec ce numéro n'existe pas.");
-        if (banques.get(b1).getComptes().get(nc1.getNum()).getDateFermeture() != null)
+        if (banques.get(b1.getNum()).getComptes().get(nc1.getNum()).getDateFermeture() != null)
             throw new IllegalArgumentException("Le compte est déjà fermé.");
-        if (banques.get(b2).getComptes().get(nc2.getNum()).getDateFermeture() != null)
+        if (banques.get(b2.getNum()).getComptes().get(nc2.getNum()).getDateFermeture() != null)
             throw new IllegalArgumentException("Le compte est déjà fermé.");
-        if (banques.get(b1).getComptes().get(nc1.getNum()).getSolde() - montant - FRAIS_TRANSACTION_SORTANTE < MIN_SOLDE)
+        if (banques.get(b1.getNum()).getComptes().get(nc1.getNum()).getSolde() - montant - FRAIS_TRANSACTION_SORTANTE < MIN_SOLDE)
             throw new IllegalArgumentException("Le solde du compte après transaction doit être plus grand ou égal au solde minimum.");
 
 
         // Post-conditions
-        banques.get(b1).transactionSortante(nc1, montant);
-        banques.get(b2).transactionEntrante(nc2, montant);
+        banques.get(b1.getNum()).transactionSortante(nc1, montant);
+        banques.get(b2.getNum()).transactionEntrante(nc2, montant);
 
         sortiesC += (montant + FRAIS_TRANSACTION_SORTANTE);
         depotsC += (montant - FRAIS_TRANSACTION_ENTRANTE);

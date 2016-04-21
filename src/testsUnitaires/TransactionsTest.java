@@ -22,51 +22,50 @@ public class TransactionsTest {
     private Date dateExFin = new Date(new Jour(31), new Mois(12), new An(2016));
     private Banque b1 = new Banque(dateExFin);
     private Banque b2 = new Banque(dateExFin);
-    private HashMap<NumBanque, Banque> banques = new HashMap<>();
+    private HashMap<Integer, Banque> banques = new HashMap<>();
     private Transactions t;
 
 
+    // Test fixture
     @Before
     public void setUp() {
-
-        System.out.println("TEST TEST TEST");
         b1.ouvrirCompte(MIN_SOLDE, new NumCompte(1), dateOuv);
         b1.ouvrirCompte(MIN_SOLDE + 10, new NumCompte(2), dateOuv);
         b1.ouvrirCompte(MIN_SOLDE + 100, new NumCompte(3), dateOuv);
         b1.ouvrirCompte(MIN_SOLDE + 1000, new NumCompte(4), dateOuv);
-        b1.ouvrirCompte(MIN_SOLDE + 1000, new NumCompte(5), dateOuv);
+        b1.ouvrirCompte(MIN_SOLDE + 10000, new NumCompte(5), dateOuv);
 
-        b2.ouvrirCompte(MIN_SOLDE, new NumCompte(10), dateOuv);
-        b2.ouvrirCompte(MIN_SOLDE + 10, new NumCompte(20), dateOuv);
-        b2.ouvrirCompte(MIN_SOLDE + 100, new NumCompte(30), dateOuv);
-        b2.ouvrirCompte(MIN_SOLDE + 1000, new NumCompte(40), dateOuv);
-        b2.ouvrirCompte(MIN_SOLDE + 1000, new NumCompte(50), dateOuv);
+        b2.ouvrirCompte(MIN_SOLDE, new NumCompte(1), dateOuv);
+        b2.ouvrirCompte(MIN_SOLDE + 10, new NumCompte(2), dateOuv);
+        b2.ouvrirCompte(MIN_SOLDE + 100, new NumCompte(3), dateOuv);
+        b2.ouvrirCompte(MIN_SOLDE + 1000, new NumCompte(4), dateOuv);
+        b2.ouvrirCompte(MIN_SOLDE + 10000, new NumCompte(5), dateOuv);
 
-
-        banques.put(new NumBanque(1), b1);
-        banques.put(new NumBanque(2), b2);
+        banques.put(1, b1);
+        banques.put(2, b2);
     }
 
     // Constructeur valide : les arguments respectent les préconditions
     @Test
     public void test_TransactionsConstructeur_valide() {
-        if(banques == null){
-            System.out.println("NULL");
-        }
         this.t = new Transactions(banques);
-
     }
 
     // Constructeur invalide : Le nombre de banques doit être compris entre 2 et MAX_BANQUE
     @Test(expected = IllegalArgumentException.class)
     public void test_TransactionsConstructeur_Banques_Taille() {
-
+        HashMap<Integer, Banque> banquesTest = new HashMap<>();
+        banquesTest.put(1, b1);
+        this.t = new Transactions(banquesTest);
     }
 
     // Constructeur invalide : Une banque ne peut être associée à deux numéros différents
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = IllegalStateException.class)
     public void test_TransactionsConstructeur_Banques_Valeurs_Multiples() {
-
+        HashMap<Integer, Banque> banquesTest = new HashMap<>();
+        banquesTest.put(1, b1);
+        banquesTest.put(2, b1);
+        this.t = new Transactions(banquesTest);
     }
 
 
@@ -77,7 +76,8 @@ public class TransactionsTest {
     // Transaction interbancaire valide : les arguments respectent les préconditions
     @Test
     public void test_transactionInter_valide() {
-
+        t = new Transactions(banques);
+        t.transactionInter(new NumBanque(1), new NumBanque(2), new NumCompte(5), new NumCompte(1), 10);
     }
 
     // Transaction interbancaire invalide :
