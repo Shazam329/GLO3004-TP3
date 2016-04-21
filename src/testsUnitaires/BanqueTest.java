@@ -57,21 +57,34 @@ public class BanqueTest {
     // Le solde initial ne doit pas être inférieur au solde minimal
     @Test(expected = IllegalArgumentException.class)
     public void test_ouvrirCompte_soldeInit_invalide() {
-        
+        int soldeInit = MIN_SOLDE - 1;
+        NumCompte nc = new NumCompte(10);
+        Date o = new Date(new Jour(20), new Mois(4), new An(2016));
+
+        banque.ouvrirCompte(soldeInit, nc, o);
     }
 
     // Ouvrir compte invalide :
-    // Le nombre de comptes ne doit pas être supérieur à la limite maximale
+    // Le numéro de compte ne doit pas être supérieur à la limite maximale
     @Test(expected = IllegalArgumentException.class)
     public void test_ouvrirCompte_maxComptes_invalide() {
+        int soldeInit = 100000;
+        NumCompte nc = new NumCompte(MAX_NUM + 1);
+        Date o = new Date(new Jour(20), new Mois(4), new An(2016));
 
+        banque.ouvrirCompte(soldeInit, nc, o);
     }
 
     // Ouvrir compte invalide :
     // Un compte avec ce numéro existe déjà
     @Test(expected = IllegalArgumentException.class)
     public void test_ouvrirCompte_numCompte_invalide() {
+        int soldeInit = 100000;
+        NumCompte nc = new NumCompte(10);
+        Date o = new Date(new Jour(20), new Mois(4), new An(2016));
 
+        banque.ouvrirCompte(soldeInit, nc, o);
+        banque.ouvrirCompte(soldeInit, nc, o);
     }
 
     // ----------------------------------------------------------------------------
