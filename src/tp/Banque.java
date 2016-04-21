@@ -74,7 +74,7 @@ public class Banque {
         if (soldeInit < MIN_SOLDE)
             throw new IllegalArgumentException("Le solde initial ne doit pas être inférieur au solde minimal.");
         if (comptes.size() >= MAX_NUM)
-            throw new IllegalArgumentException("Le nombre de comptes ne doit pas être supérieur à la limite maximale.");
+            throw new IllegalArgumentException("Le numéro de compte ne doit pas être supérieur à la limite maximale.");
         if (comptes.containsKey(nc.getNum())){
             throw new IllegalArgumentException("Un compte avec ce numéro existe déjà.");
         }
