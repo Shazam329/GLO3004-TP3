@@ -31,7 +31,7 @@
     <splitter split-orientation="horizontal" split-proportion="0.40272027">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file leaf-file-name="Main.java" pinned="false" current-in-tab="true">
+          <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/tp/Main.java">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="0">
@@ -43,11 +43,11 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="BanqueTest.java" pinned="false" current-in-tab="false">
+          <file leaf-file-name="BanqueTest.java" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/testsUnitaires/BanqueTest.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="187">
-                  <caret line="11" column="3" selection-start-line="11" selection-start-column="3" selection-end-line="11" selection-end-column="3" />
+                <state relative-caret-position="391">
+                  <caret line="23" column="5" selection-start-line="23" selection-start-column="5" selection-end-line="23" selection-end-column="5" />
                   <folding>
                     <element signature="imports" expanded="true" />
                   </folding>
@@ -68,8 +68,8 @@
           <file leaf-file-name="CompteTest.java" pinned="true" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/testsUnitaires/CompteTest.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="561">
-                  <caret line="33" column="9" selection-start-line="33" selection-start-column="9" selection-end-line="33" selection-end-column="52" />
+                <state relative-caret-position="357">
+                  <caret line="21" column="4" selection-start-line="21" selection-start-column="4" selection-end-line="31" selection-end-column="5" />
                   <folding>
                     <element signature="imports" expanded="true" />
                   </folding>
@@ -149,7 +149,6 @@
         <option value="$APPLICATION_HOME_DIR$/lib/junit-4.12.jar!/org/junit/internal/runners/model/ReflectiveCallable.class" />
         <option value="$PROJECT_DIR$/src/testsUnitaires/DateTest.java" />
         <option value="$PROJECT_DIR$/src/tp/Constantes.java" />
-        <option value="$PROJECT_DIR$/src/testsUnitaires/CompteTest.java" />
         <option value="$PROJECT_DIR$/src/tp/Compte.java" />
         <option value="$PROJECT_DIR$/src/tp/NumCompte.java" />
         <option value="$PROJECT_DIR$/src/tp/NumBanque.java" />
@@ -157,8 +156,9 @@
         <option value="$PROJECT_DIR$/src/tp/Transactions.java" />
         <option value="$PROJECT_DIR$/src/testsUnitaires/TransactionsTest.java" />
         <option value="$PROJECT_DIR$/src/tp/Banque.java" />
-        <option value="$PROJECT_DIR$/src/testsUnitaires/BanqueTest.java" />
         <option value="$PROJECT_DIR$/src/tp/Main.java" />
+        <option value="$PROJECT_DIR$/src/testsUnitaires/CompteTest.java" />
+        <option value="$PROJECT_DIR$/src/testsUnitaires/BanqueTest.java" />
       </list>
     </option>
   </component>
@@ -1118,22 +1118,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/testsUnitaires/CompteTest.java">
+    <entry file="file://$PROJECT_DIR$/src/tp/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="561">
-          <caret line="33" column="9" selection-start-line="33" selection-start-column="9" selection-end-line="33" selection-end-column="52" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/testsUnitaires/BanqueTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" column="3" selection-start-line="11" selection-start-column="3" selection-end-line="11" selection-end-column="3" />
-          <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="e#0#2575#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1146,12 +1136,22 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/tp/Main.java">
+    <entry file="file://$PROJECT_DIR$/src/testsUnitaires/CompteTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state relative-caret-position="357">
+          <caret line="21" column="4" selection-start-line="21" selection-start-column="4" selection-end-line="31" selection-end-column="5" />
           <folding>
-            <element signature="e#0#2575#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/testsUnitaires/BanqueTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="23" column="5" selection-start-line="23" selection-start-column="5" selection-end-line="23" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>

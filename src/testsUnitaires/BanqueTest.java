@@ -12,6 +12,17 @@ import static tp.Constantes.*;
  */
 public class BanqueTest {
 
+    /////////////////////////////
+    //  Tests du constructeur  //
+    /////////////////////////////
+
+    // Constructeur valide : les valeurs concordent avec les paramètres
+    // Pas de préconditions à valider
+    @Test
+    public void test_BanqueConstructeur_Valide() {
+
+    }
+
     ////////////////////////////////////
     //  Tests des méthodes publiques  //
     ////////////////////////////////////
